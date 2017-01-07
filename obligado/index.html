@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html lang="es" >
+   <head>
+      <!-- All the files that are required -->
+      <title>Registro 3 de 3</title>
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="../css/datatables.min.css" />
+      <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" /
+      <link rel="stylesheet" type="text/css" href="../css/devicons.css" />
+      <link rel="stylesheet" type="text/css" href="../css/4d4.css" />
+      <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+      <script src="../js/jquery.min.js"></script>	
+      <script src="../js/bootstrap.min.js"></script>	
+      
+      <script src="../js/datatables.min.js"></script>	
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <style>      
+      	body {
+         	font-family: 'Varela Round';
+        }
+      </style>
+   </head>
+   <body class="not-login login-container-obligado">
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="row-fluid logonav container">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="#"><img alt="Brand" id="sep-logo" src="../img/contraloria-logo-negro.png" /></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse ">
+               <!--
+                  <ul class="nav navbar-nav navbar-test">
+                  
+                    <li><a href="/superadmin/publicaciones"><span class=""></span>&nbsp;Mural</a></li>                        
+                    <li><a href="/director/ranking"><span class=""></span>&nbsp;Ranking</a></li>
+                    
+                    
+                  </ul>-->
+               <ul class="nav navbar-nav navbar-right pull-right hidden-sm hidden-xs user-area">
+                  <li>
+                     <a href="#">Hector P. <span class="caret"></span></a>
+                  </li>
+               </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+         <div class="row-fluid menunav">
+            <div id="navbar2" class="navbar-collapse collapse ">
+               <!--
+                  <ul class="nav navbar-nav navbar-test">
+                  
+                    <li><a href="/superadmin/publicaciones"><span class=""></span>&nbsp;Mural</a></li>                        
+                    <li><a href="/director/ranking"><span class=""></span>&nbsp;Ranking</a></li>
+                    
+                    
+                  </ul>-->
+               <ul class="nav navbar-nav navbar-right pull-right hidden-sm hidden-xs user-area">
+                  <li>
+                     <a href="/logoutUser">Cerrar Sesión&nbsp;&nbsp;&nbsp;</a>
+                  </li>
+               </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </nav>
+      <div class="container main-container">
+         <div class="row">
+            <div class="col-md-8">
+               <div id="declaraciones-tabs" class="">
+                  <ul class="nav nav-tabs tabs-declaraciones">
+                     <li class="active"><a class="tab-declaracion-requerida" href="#1" data-toggle="tab">Proximas Declaraciones Requeridas</a></li>
+                     <li><a class="tab-declaracion-preventiva" href="#2" data-toggle="tab"><span class="icon-4 "></span>&nbsp;Declaraciones preventivas</a></li>
+                  </ul>
+               </div>
+               <div class="tab-content ">
+                  <div class="tab-pane active panel panel-declaraciones" id="1" role="tabpanel">
+                     <div class="row-fluid">
+                        <div class="col-md-12">
+                           <h4>Declaraciones patrimoniales</h4>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-4">
+                           <span class="icon-1 center-block icon-declaraciones"></span>
+                        </div>
+                        <div class="col-md-8">
+                           <div class="pull-right">
+                              <a class="btn btn-default" disabled>Fecha límite: 15 de Octubre</a>
+                              <a class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Iniciar Declaración</a>
+                           </div>
+                        </div>
+                     </div>
+                     <hr />
+                     <div class="row-fluid">
+                        <div class="col-md-12">
+                           <h4>Declaraciones de posible conflicto de intereses</h4>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-4">
+                           <span class="icon-3 center-block icon-declaraciones" ></span>
+                        </div>
+                        <div class="col-md-8">
+                           <div class="pull-right">
+                              <a class="btn btn-default" disabled>Fecha límite: 30 de Octubre</a>
+                              <a class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Iniciar Declaración</a>
+                           </div>
+                        </div>
+                     </div>
+                     <hr />
+                     <div class="row-fluid">
+                        <div class="col-md-12">
+                           <h4>Declaraciones Fiscal o de la Constancia de Percepciones y Deducciones</h4>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-4">
+                           <span class="icon-2 center-block icon-declaraciones" ></span>
+                        </div>
+                        <div class="col-md-8">
+                           <div class="pull-right">
+                              <a class="btn btn-default" disabled>Fecha límite: 21 de Octubre</a>
+                              <a class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Iniciar Declaración</a>
+                           </div>
+                        </div>
+                     </div>
+                     <hr />
+                  </div>
+                  <div class="tab-pane panel panel-declaraciones" id="2" role="tabpanel">
+                     <h3>Notice the gap between the content and tab after applying a background color</h3>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-4">
+               <div class="panel panel-danger">
+                  <div class="panel-heading">
+                     <h3 class="panel-title" >Avisos de contraloría</h3>
+                  </div>
+                  <div class="panel-body">
+                     <p>- Favor de completar sus declaraciones iniciales antes del día 15 de Oct.</p>
+                     <small class="pull-right"><span class="icon-5">&nbsp;</span>Enviado: El 10 de Oct. del 2016</small>
+                     <br/><hr />
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row usuario-panel-data" >
+         	<div class="col-md-2">
+         	    <a href="#">
+      				<img class="media-object usuario-foto-perfil" src="../img/hector.jpg" alt="foto perfil usuario" >
+    			</a>
+			</div>
+			<div class="col-md-3">
+				<h4>Héctor Herrera Pérez</h4>
+				<small>Supervisor / Fiscalía general del estado</small>
+				<br />
+				<small>Unidad responsable de dirección de obras</small>
+			</div>
+			<div class="col-md-3">
+				
+				<span>Correo: hector@loshs.com</span>
+				<br/>				
+				<span>Tel: 3318-93-5068</span>
+				<br/>				
+				<span>RFC: HEPH920518FF0</span>
+				<br/>				
+				<span>Dirección: Palmas #4 Col. Centro</span>			
+			</div>
+			<div class="col-md-3 usuario-panel-fechas">
+			<a href="#" class="btn btn-default pull-right" data-toggle="tooltip" title="Mi perfil"><span class="glyphicon glyphicon-cog"></span></a>				
+			<br />
+				<span>Fecha de registro: <small>10 de Octubre del 2016</small></span>				
+				<br/>				
+				<span>Fecha de último acceso: <small>11 de Octubre del 2016</small></span>
+				<br/>				
+				<span>Fecha de última modificación: <small>12 de Octubre del 2016</small></span>		
+			</div>
+          </div>
+         <div class="usuario-panel-data row panel-acciones">
+         	<br /><br />
+         		<div class="panel panel-info panel-acciones">
+         	      <div class="panel-heading">Historial de movimientos</div>
+         	      <div class="panel-body">
+         	      <table id="tableAcciones">
+                     <thead>
+                        <tr >
+                           <th >Id</th>
+                           <th >Fecha de declaración</th>
+                           <th >Tipo</th>
+                           <th >Archivos Adjuntos</th>
+                           <th >Folio</th>
+                        </tr>
+                     </thead>
+                     <tbody >
+                        <tr>
+                           <td >1</td>
+                           <td >16 de Agosto del 2016</td>
+                           <td >&nbsp;&nbsp;&nbsp;<span class="icon-1"></span></td>
+                           <td ><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Ver Archivos</a></td>
+                           <td ><a href="#" data-toggle="tooltip" title="Ver constancia de declaración">123456789</a></td>
+                        </tr>
+                        <tr >
+                           <td >2</td>
+                           <td >30 de Agosto del 2016</td>
+                           <td >&nbsp;&nbsp;&nbsp;<span class="icon-2"></span></td>
+                           <td ><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Ver Archivos</a></td>
+                           <td ><a href="#" data-toggle="tooltip" title="Ver constancia de declaración">939938121</a></td>
+                           
+                        </tr>
+                        <tr>
+                           <td >3</td>
+                           <td >1 de Septiembre del 2016</td>
+                           <td >&nbsp;&nbsp;&nbsp;<span class="icon-3"></span></td>
+                           <td ><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Ver Archivos</a></td>
+                           <td ><a href="#" data-toggle="tooltip" title="Ver constancia de declaración">768564332</a></td>
+                        </tr>
+                        <tr >
+                           <td >4</td>
+                           <td >21 de Septiembre del 2016</td>
+                           <td >&nbsp;&nbsp;&nbsp;<span class="icon-1"></span></td>
+                           <td ><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Ver Archivos</a></td>
+                           <td ><a href="#" data-toggle="tooltip" title="Ver constancia de declaración">123412341</a></td>
+                           
+                        </tr>
+                        <tr >
+                           <td >5</td>
+                           <td >1 de Enero del 2017</td>
+                           <td >&nbsp;&nbsp;&nbsp;<span class="icon-2"></span></td>
+                           <td ><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Ver Archivos</a></td>
+                           <td ><a href="#" data-toggle="tooltip" title="Ver constancia de declaración">2131351234</a></td>
+                           
+                        </tr>
+                     </tbody>
+                  </table></div>
+                </div>
+            <br />
+         </div>
+      </div>
+   </body>
+   
+	<footer class="footer">
+      <div class="row">
+        
+      </div>
+      
+   	<script type="text/javascript">
+   	
+            $(document).ready(function() {
+            	$('#tableAcciones').dataTable({
+            		'scrollCollapse' : true,
+                   	'scrollY': "250px"
+            	});
+            });
+   	</script>
+    </footer>
+</html>

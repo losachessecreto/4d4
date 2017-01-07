@@ -5,7 +5,7 @@
 
 <title>Mi Mural</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />	
-<link rel="stylesheet" type="text/css" href="../css/mimural.css" />	
+<link rel="stylesheet" type="text/css" href="../css/4d4.css" />	
 
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
 <script src="../js/jquery.min.js"></script>	
@@ -13,96 +13,93 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <style>
-  body{
-  	font-family: 'Varela Round';
-  }
+
+@font-face {
+  font-family: "Compass";
+  src: url('../fonts/Compass.ttf') format("truetype");
+}
+body { 
+	font-family: "Compass";
+	overflow: hidden;	
+}
+
 </style>
 </head>
-<body>
-<nav class="navbar navbar-default navbar-fixed-top ">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
+<body class="login-container body-login">
+   <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="row-fluid logonav container ">
+        
+        <div id="navbar" class="navbar-collapse collapse ">
+          <!--
+          <ul class="nav navbar-nav navbar-test">
+          
+            <li><a href="/superadmin/publicaciones"><span class=""></span>&nbsp;Mural</a></li>                        
+            <li><a href="/director/ranking"><span class=""></span>&nbsp;Ranking</a></li>
+            
+            
+          </ul>-->
+          <ul class="nav navbar-nav navbar-right pull-right hidden-sm hidden-xs user-area">
+                  <li>
+                    <a href="#">Bienvenido</a>
+                  </li>
+                  
+               </ul>
+                              
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+          
+<div class="container">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-       
-        <li><a href="#">Bienvenido a Mi Mural</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<!-- LOGIN FORM -->
-<div class="text-center" style="padding:50px 0">
-	<div >
-		<img style="width:300px;" src="../img/sepgovjalisco.png"/>
+<div class="row">
+	<div class="col-md-12">	
+		<img alt="login-contraloria-logo" class="login-logo center-block" src="../img/contraloria-logo.png" />
 	</div>
-	<br />
-	<br />
-	<div class="alert alert-danger" role="alert" id='loginmessage' style="display: none">
-    <span>Usuario o contraseña incorrecto</span>
-  </div>
-	<!--<h2 style="color:#a93226;" id='loginmessage'>Mensaje Oculto</h2>	-->
-	<h2 style="color:#919191;">Ingreso</h2>	
-	<div class="login-form-1">
-            <form id="login-form" class="text-left" action="/loginUser" method="POST">
-			<div class="login-form-main-message"></div>
-			<div class="main-login-form">
-				
-				<div class="login-group">
-					<div class="form-group">
-						<input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="RFC / Matrícula">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="Contraseña">
-					</div>
-					<div class="form-group login-group-checkbox">
-						<input type="checkbox" id="lg_remember" name="lg_remember">
-						<label for="lg_remember">Recordarme</label>
-					</div>
-				</div>
-				<button type="submit" class="login-button"><i class="glyphicon glyphicon-chevron-right"></i></button>
-			</div>
-			<div class="etc-login-form">
-				<p>Olvidaste tu constraseña? <a href="#">Click aquí</a></p>
-				<p>Nuevo usuario? <a href="#">Registrate aquí</a></p>
-			</div>
-		</form>
-	</div>
-	<!-- end:Main Form -->
 </div>
+	<div class="panel center-block login-form">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<input type="text" class="form-control" placeholder="Nombre de usuario" />
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-12">
+			<input type="text" class="form-control" placeholder="Contraseña" />
+		</div>
+	</div>
+	<hr />
+	
+	<div class="row">
+		<div class="col-sm-5">		
+			<div class="checkbox">
+  				<label><input type="checkbox" value="">Recordarme</label>
+			</div>
+		</div>
+		<div class="col-sm-7">
+			<a class="btn btn-primary pull-right" href="#">Inicie Sesión</a>
+		</div>
+		
+	</div>
+	</div>
+
+	<div class="row center-block">
+	<div class="col-sm-4 col-sm-offset-4">
+	
+		<label class="login-pwd-leyenda">¿Olvidó su contraseña? Haga click <a href="#" style="color:#fff;text-decoration:underline">aquí</a></label>
+	</div>
+	</div>
+	
+
+
+</div>
+	<footer class="footer">
+      <div class="row">
+        
+		<img alt="login-contraloria-logo" class="onda-footer" src="../img/onda.png" />
+		
+      </div>
+    </footer>
 </body>
-<script>
-
-msgLogin = readCookie('loginMessage');
-if (msgLogin) {
-  msgLogin = msgLogin.replace(/%20/g, " ")
-  $("#loginmessage span").text(msgLogin);
-  $("#loginmessage").show();
-  
-} else {
-  $("#loginmessage").hide();
-}
-
-function readCookie(name) {
-  var nameEQ = name + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-  }
-  return null;
-}
-
-
-</script>
 </html>
