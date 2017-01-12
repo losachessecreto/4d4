@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import loshs.registro3de3.server.beans.Statement;
 import java.sql.Types;
 import java.util.Date;
 import java.util.LinkedList;
@@ -31,13 +31,13 @@ import loshs.registro3de3.server.beans.User;
  * Root resource (exposed at "myresource" path)
  */
 @ManagedBean
-@Path("users")
-public class UsersResource {
+@Path("statements")
+public class StatementsResource {
 
     @Context
     DatasourceContainer dsc;
 
-    static final Logger LOGGER = Logger.getLogger(UsersResource.class.getName());
+    static final Logger LOGGER = Logger.getLogger(StatementsResource.class.getName());
 
     /**
      * Method handling HTTP GET requests. The returned object will be sent to
@@ -47,45 +47,38 @@ public class UsersResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUsers() {
+    public Response getStatements() {
         Connection conn = null;
-        Statement st = null;
+        java.sql.Statement st = null;
         ResultSet rs = null;
         try {
-            LinkedList<User> userList = new LinkedList();
+            LinkedList<Statement> statementList = new LinkedList();
             conn = dsc.getDatasource().getConnection();
             st = conn.createStatement();
-            rs = st.executeQuery("SELECT * FROM users WHERE status = 0 ORDER BY id");
+            rs = st.executeQuery("SELECT s.id, s.user, u.user as user_name, "
+                    + "u.position as user_position, s.type, s.status, s.date, "
+                    + "s.entity, s.folio_number "
+                    + "FROM statements s, users u "
+                    + "WHERE s.status >= 0 AND u.status >= 0 "
+                    + "ORDER BY s.id;");
             while (rs.next()) {
-                User user = new User(
+                Statement statement = new Statement(
                         rs.getInt("id"),
-                        rs.getString("user"),
-                        rs.getString("password").toCharArray(),
-                        rs.getString("mail"),
-                        rs.getString("father_lastname"),
-                        rs.getString("mother_lastname"),
-                        rs.getString("given_name"),
-                        rs.getString("position"),
-                        rs.getTimestamp("register_date") != null ? new Date(rs.getTimestamp("register_date").getTime()) : null,
-                        rs.getTimestamp("last_modification_date") != null ? new Date(rs.getTimestamp("last_modification_date").getTime()) : null,
-                        rs.getInt("last_user_modified"),
-                        rs.getTimestamp("last_access_date") != null ? new Date(rs.getTimestamp("last_access_date").getTime()) : null,
-                        rs.getString("last_ip"));
-                userList.add(user);
+                        rs.getInt("user"),
+                        rs.getString("user_name"),
+                        rs.getString("user_position"),
+                        rs.getShort("type"),
+                        rs.getShort("status"),
+                        rs.getTimestamp("date") != null ? new Date(rs.getTimestamp("date").getTime()) : null,
+                        rs.getString("entity"),
+                        rs.getString("folio_number"));
+                statementList.add(statement);
             }
-            
-            Response response = Response.ok(userList.toArray(new User[userList.size()])).build();
-            response.getHeaders().add("Access-Control-Allow-Origin", "*");
-            response.getHeaders().add("Access-Control-Allow-Headers",
-                    "origin, content-type, accept, authorization");
-            response.getHeaders().add("Access-Control-Allow-Credentials", "true");
-            response.getHeaders().add("Access-Control-Allow-Methods",
-                    "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-            return response;
-             
-            //return Response.ok(userList.toArray(new User[userList.size()])).build();
-
-            //return userList.toArray(new User[userList.size()]);
+            return Response.ok(statementList.toArray(new Statement[statementList.size()])).build();
+            /*
+            return Response.status(Status.NOT_IMPLEMENTED).entity(new HTTPJsonResponseObject(501, "Not Implemented",
+                                "Método no implementado aún")).build();
+             */
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
             //return Response.status(500).build();
@@ -107,6 +100,7 @@ public class UsersResource {
         }
     }
 
+    /////// Change
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

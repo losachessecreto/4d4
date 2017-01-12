@@ -12,23 +12,23 @@ import org.postgresql.ds.PGPoolingDataSource;
  * @author hugo
  */
 public class DatasourceContainer {
-  
-    public static final PGPoolingDataSource ds = new PGPoolingDataSource();
+
+    public static final PGPoolingDataSource DS = new PGPoolingDataSource();
 
     static {
-        ds.setDataSourceName("A Data Source");
-        ds.setServerName("localhost");
-        ds.setPortNumber(5432);
-        ds.setDatabaseName("test");
-        ds.setUser("postgres");
-        ds.setPassword("postgres");
-        ds.setMaxConnections(10);
+        DS.setDataSourceName("A Data Source");
+        DS.setServerName("localhost");
+        DS.setPortNumber(5432);
+        DS.setDatabaseName("test");
+        DS.setUser("postgres");
+        DS.setPassword("postgres");
+        DS.setMaxConnections(10);
     }
-        
-    public DatasourceContainer(){
+
+    public DatasourceContainer() {
     }
 
     public PGPoolingDataSource getDatasource() {
-        return ds;
+        return DS;
     }
 }
