@@ -16,7 +16,7 @@ Last change	: 2015/03/27
 6. Form Invalid
 7. Form - Main Message
 8. Custom Checkbox & Radio
-9. Misc
+9. Miscww
 -------------------------------------------------------------------*/
 /*=== 1. General Structure ===*/
 html,
@@ -27,7 +27,7 @@ body {
   height: 100%;
 }
 body.not-login{	
-  padding-top: 230px;
+  padding-top: 70px;
 }
 body.body-login{
 	padding-top: 52px;
@@ -118,6 +118,7 @@ body.body-login{
 }
 .main-container{
 	background-color: #183455;
+	margin-top: 50px;
 	padding-top:10px;
 }
 .tabs-declaraciones > li{
@@ -214,4 +215,42 @@ body.body-login{
 	font-size:40px;
 	text-align:center;
 	color: #428BCA;
+}
+.medium-icon{
+	font-size: 2em;
+}
+.success{
+	color: green;
+}
+.info{
+	color: rgba(121,190,230, 1);
+}
+.warning{
+
+	color: rgba(240,216,120, 1);
+}
+.danger{
+
+	color: rgba(254,64,66, 1);
+}
+.boton-grid{
+	width: 80%;
+}
+.navbar-default .navbar-nav>li>a:hover{
+	color: #fff;
+	text-decoration: underline;
+}
+
+#navbar2 > ul > li:nth-child(2),
+#navbar2 > ul > li:nth-child(3),
+#navbar2 > ul > li:nth-child(4),
+#navbar2 > ul > li:nth-child(5),
+#navbar2 > ul > li:nth-child(6){
+	border-left: 10px solid #fff;
+}
+.send-button-row-container {
+	padding-top: 45px;
+}
+#tableUsuarios_wrapper{
+	padding-top: 30px;
 }

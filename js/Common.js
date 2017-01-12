@@ -1,24 +1,26 @@
-"use strict";
-var $ = require("jquery");
-var Common = (function () {
-    function Common() {
-        var _this = this;
-        this.apiUrl = 'http://192.168.15.8';
-        this.makeAPICall = function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
-            $.ajax({
-                url: _this.apiUrl + '/' + moduleUrl,
-                type: method,
-                data: data,
-                dataType: 'jsonp',
-                error: function (data) {
-                    errorCallback(data, errorParams);
-                },
-                success: function (data) {
-                    successCallback(data, successParams);
-                }
-            });
-        };
+var Common = {
+	apiUrl:'http://192.168.15.11:8080/registro3de3/webapi',    
+	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
+    	$.ajax({
+			url: Common.apiUrl + '/' + moduleUrl,
+            type: method,
+            data: data,
+            crossDomain: true,
+            dataType: 'jsonp',
+            error: function (xhr, status) {
+            	alert('completed with error');
+            	debugger;
+            	if(!!errorCallback) {
+	            	errorCallback(data, errorParams);
+            	}            	
+            },
+            success: function (data) {
+	            alert('success');
+            	debugger;
+            	if(!!successCallback) {            		
+	                successCallback(data, successParams);
+            	}
+            }
+        });
     }
-    return Common;
-}());
-exports.Common = Common;
+};
