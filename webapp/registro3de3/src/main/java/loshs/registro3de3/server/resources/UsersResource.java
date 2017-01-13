@@ -25,6 +25,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import loshs.registro3de3.server.beans.DatasourceContainer;
 import loshs.registro3de3.server.beans.HTTPJsonResponseObject;
+import loshs.registro3de3.server.beans.Registro3de3Exception;
 import loshs.registro3de3.server.beans.User;
 
 /**
@@ -73,7 +74,7 @@ public class UsersResource {
                         rs.getString("last_ip"));
                 userList.add(user);
             }
-            
+            /*
             Response response = Response.ok(userList.toArray(new User[userList.size()])).build();
             response.getHeaders().add("Access-Control-Allow-Origin", "*");
             response.getHeaders().add("Access-Control-Allow-Headers",
@@ -82,8 +83,8 @@ public class UsersResource {
             response.getHeaders().add("Access-Control-Allow-Methods",
                     "GET, POST, PUT, DELETE, OPTIONS, HEAD");
             return response;
-             
-            //return Response.ok(userList.toArray(new User[userList.size()])).build();
+             */
+            return Response.ok(userList.toArray(new User[userList.size()])).build();
 
             //return userList.toArray(new User[userList.size()]);
         } catch (SQLException ex) {
@@ -180,7 +181,12 @@ public class UsersResource {
                     + "?, ?, ?, ?, ?,"
                     + "?, ?) RETURNING id");
             st.setString(1, user.getUser());
-            st.setString(2, new String(user.getPassword()));
+            if (user.getPassword() != null) {
+                st.setString(2, new String(user.getPassword()));
+            } else {
+                st.setNull(2, Types.VARCHAR);
+            }
+            
             st.setString(3, user.getMail());
             st.setString(4, user.getFather_lastname());
             st.setString(5, user.getMother_lastname());
@@ -228,7 +234,8 @@ public class UsersResource {
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
             //return Response.status(500).build();
-            throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
+            //throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
+            throw new Registro3de3Exception(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
             try {
                 if (rs != null) {
@@ -324,19 +331,6 @@ public class UsersResource {
                 LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
-    }
-
-    @Path("test")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public User[] testResource() {
-        Date d = new Date();
-
-        return new User[]{
-            new User(0, "user", new char[]{}, "mail", "father_lastname", "mother_lastname",
-            "given_name", "Supervisor", d, d, 0, d, "last_ip"),
-            new User(0, "user2", new char[]{}, "mail", "father_lastname", "mother_lastname",
-            "given_name", "Supervisor", d, d, 0, d, "last_ip")};
     }
 
 }

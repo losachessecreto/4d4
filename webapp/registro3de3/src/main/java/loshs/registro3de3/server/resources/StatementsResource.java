@@ -58,9 +58,9 @@ public class StatementsResource {
             rs = st.executeQuery("SELECT s.id, s.user, u.user as user_name, "
                     + "u.position as user_position, s.type, s.status, s.date, "
                     + "s.entity, s.folio_number "
-                    + "FROM statements s, users u "
+                    + "FROM statements s JOIN users u ON s.user = u.id "
                     + "WHERE s.status >= 0 AND u.status >= 0 "
-                    + "ORDER BY s.id;");
+                    + "ORDER BY s.id");
             while (rs.next()) {
                 Statement statement = new Statement(
                         rs.getInt("id"),
@@ -100,46 +100,42 @@ public class StatementsResource {
         }
     }
 
-    /////// Change
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("id") long userId) {
+    public Response getStatement(@PathParam("id") long statementId) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             conn = dsc.getDatasource().getConnection();
-            st = conn.prepareStatement("SELECT * FROM users WHERE id = ? AND status = 0");
-            st.setLong(1, userId);
+            st = conn.prepareStatement("SELECT s.id, s.user, u.user as user_name, "
+                    + "u.position as user_position, s.type, s.status, s.date, "
+                    + "s.entity, s.folio_number "
+                    + "FROM statements s JOIN users u ON s.user = u.id "
+                    + "WHERE s.status >= 0 AND u.status >= 0 AND s.id = ?");
+            st.setLong(1, statementId);
             rs = st.executeQuery();
-            User user;
+            Statement statement;
             if (rs.next()) {
-                user = new User(
+                statement = new Statement(
                         rs.getInt("id"),
-                        rs.getString("user"),
-                        rs.getString("password").toCharArray(),
-                        rs.getString("mail"),
-                        rs.getString("father_lastname"),
-                        rs.getString("mother_lastname"),
-                        rs.getString("given_name"),
-                        rs.getString("position"),
-                        rs.getTimestamp("register_date") != null ? new Date(rs.getTimestamp("register_date").getTime()) : null,
-                        rs.getTimestamp("last_modification_date") != null ? new Date(rs.getTimestamp("last_modification_date").getTime()) : null,
-                        rs.getInt("last_user_modified"),
-                        rs.getTimestamp("last_access_date") != null ? new Date(rs.getTimestamp("last_access_date").getTime()) : null,
-                        rs.getString("last_ip"));
+                        rs.getInt("user"),
+                        rs.getString("user_name"),
+                        rs.getString("user_position"),
+                        rs.getShort("type"),
+                        rs.getShort("status"),
+                        rs.getTimestamp("date") != null ? new Date(rs.getTimestamp("date").getTime()) : null,
+                        rs.getString("entity"),
+                        rs.getString("folio_number"));
             } else {
                 return Response.status(Status.NOT_FOUND)
                         .entity(new HTTPJsonResponseObject(404, "Not Found",
-                                "El usuario no existe")).build();
-                //return Response.status(Status.NOT_FOUND).build();
+                                "La declaración no existe")).build();
             }
-            //return user;
-            return Response.ok(user).build();
+            return Response.ok(statement).build();
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
-            //return Response.status(500).build();
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
             try {
@@ -160,68 +156,35 @@ public class StatementsResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postUser(User user) {
+    public Response postStatement(Statement statement) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             conn = dsc.getDatasource().getConnection();
-            st = conn.prepareStatement("INSERT INTO users("
-                    + "\"user\", password, mail, father_lastname, mother_lastname, given_name,"
-                    + "position, register_date, last_modification_date, last_user_modified, "
-                    + "last_access_date, last_ip)"
-                    + "VALUES (?, ?, ?, ?, ?, "
-                    + "?, ?, ?, ?, ?,"
-                    + "?, ?) RETURNING id");
-            st.setString(1, user.getUser());
-            st.setString(2, new String(user.getPassword()));
-            st.setString(3, user.getMail());
-            st.setString(4, user.getFather_lastname());
-            st.setString(5, user.getMother_lastname());
-            st.setString(6, user.getGiven_name());
-            st.setString(7, user.getPosition());
-            if (user.getRegister_date() != null) {
-                st.setDate(8, new java.sql.Date(user.getRegister_date().getTime()));
+            st = conn.prepareStatement("INSERT INTO statements("
+                    + "status, folio_number, \"user\", type, date, entity) "
+                    + "VALUES (?, ?, ?, ?, ?, ?) RETURNING id");
+            st.setShort(1, statement.getStatus());
+            st.setString(2, statement.getFolio_number());
+            st.setInt(3, statement.getUser());
+            st.setShort(4, statement.getType());
+            if (statement.getDate() != null) {
+                st.setDate(5, new java.sql.Date(statement.getDate().getTime()));
             } else {
-                st.setNull(8, Types.DATE);
+                st.setNull(5, Types.DATE);
             }
-
-            if (user.getLast_modification_date() != null) {
-                st.setDate(9, new java.sql.Date(user.getLast_modification_date().getTime()));
-            } else {
-                st.setNull(9, Types.DATE);
-            }
-
-            if (user.getLast_user_modified() != null) {
-                st.setInt(10, user.getLast_user_modified());
-            } else {
-                st.setNull(10, Types.INTEGER);
-            }
-
-            if (user.getLast_access_date() != null) {
-                st.setDate(11, new java.sql.Date(user.getLast_access_date().getTime()));
-            } else {
-                st.setNull(11, Types.DATE);
-            }
-
-            if (user.getLast_ip() != null) {
-                st.setString(12, user.getLast_ip());
-            } else {
-                st.setNull(12, Types.OTHER);
-            }
-
+            st.setString(6, statement.getEntity());
             rs = st.executeQuery();
             if (rs.next()) {
                 return Response.ok(rs.getString("id")).build();
             } else {
                 return Response.status(Status.INTERNAL_SERVER_ERROR)
                         .entity(new HTTPJsonResponseObject(500, "Internal Server Error",
-                                "Error al insertar usuario")).build();
-                //   return Response.status(Status.INTERNAL_SERVER_ERROR).entity("Not inserted").build();
+                                "Error al insertar declaración")).build();
             }
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
-            //return Response.status(500).build();
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
             try {
@@ -243,14 +206,14 @@ public class StatementsResource {
     @Path("{id}/toggleActiveStatus")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response toggleUserStatus(@PathParam("id") long userId) {
+    public Response toggleStatementStatus(@PathParam("id") long statementId) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             conn = dsc.getDatasource().getConnection();
-            st = conn.prepareStatement("UPDATE users SET status = status * -1 - 1 WHERE id = ?");
-            st.setLong(1, userId);
+            st = conn.prepareStatement("UPDATE statements SET status = status * -1 WHERE id = ?");
+            st.setLong(1, statementId);
 
             int updateCount = st.executeUpdate();
             if (updateCount == 1) {
@@ -258,7 +221,7 @@ public class StatementsResource {
             } else {
                 return Response.status(Status.INTERNAL_SERVER_ERROR)
                         .entity(new HTTPJsonResponseObject(500, "Internal Server Error",
-                                "Error al cambiar el estado del usuario")).build();
+                                "Error al cambiar el estado de la declaración")).build();
             }
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
@@ -283,14 +246,14 @@ public class StatementsResource {
     @Path("{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteUserLogically(@PathParam("id") long userId) {
+    public Response deleteStatementLogically(@PathParam("id") long statementId) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             conn = dsc.getDatasource().getConnection();
-            st = conn.prepareStatement("UPDATE users SET status = -1 WHERE id = ?");
-            st.setLong(1, userId);
+            st = conn.prepareStatement("UPDATE statements SET status = -1 WHERE id = ?");
+            st.setLong(1, statementId);
 
             int updateCount = st.executeUpdate();
             if (updateCount == 1) {
@@ -298,7 +261,7 @@ public class StatementsResource {
             } else {
                 return Response.status(Status.INTERNAL_SERVER_ERROR)
                         .entity(new HTTPJsonResponseObject(500, "Internal Server Error",
-                                "Error al borrar usuario")).build();
+                                "Error al borrar declaración")).build();
             }
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
@@ -320,17 +283,5 @@ public class StatementsResource {
         }
     }
 
-    @Path("test")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public User[] testResource() {
-        Date d = new Date();
-
-        return new User[]{
-            new User(0, "user", new char[]{}, "mail", "father_lastname", "mother_lastname",
-            "given_name", "Supervisor", d, d, 0, d, "last_ip"),
-            new User(0, "user2", new char[]{}, "mail", "father_lastname", "mother_lastname",
-            "given_name", "Supervisor", d, d, 0, d, "last_ip")};
-    }
 
 }
