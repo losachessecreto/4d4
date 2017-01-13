@@ -1,22 +1,25 @@
 var Common = {
 	apiUrl:'http://192.168.15.11:8080/registro3de3/webapi',    
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
-    	$.ajax({
-			url: Common.apiUrl + '/' + moduleUrl,
-            type: method,
+		
+		var url =Common.apiUrl + '/' + moduleUrl;
+		
+    	$.ajax({    	
+            method: method,
+			url: url,
             data: data,
-            crossDomain: true,
-            dataType: 'jsonp',
-            error: function (xhr, status) {
-            	alert('completed with error');
-            	debugger;
+            error: function (data) {
+	            debugger;
+	            
+            	alert('completed with error');            	
             	if(!!errorCallback) {
 	            	errorCallback(data, errorParams);
             	}            	
             },
             success: function (data) {
-	            alert('success');
-            	debugger;
+	        	debugger;
+	        	
+                alert('success');    
             	if(!!successCallback) {            		
 	                successCallback(data, successParams);
             	}

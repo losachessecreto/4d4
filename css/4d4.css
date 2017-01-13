@@ -254,3 +254,38 @@ body.body-login{
 #tableUsuarios_wrapper{
 	padding-top: 30px;
 }
+.usuario-panel-data-admin{
+	background-color: #183455;	
+	color: #fff;
+}
+.usuario-foto-perfil-admin{
+	width: 170px;
+	height: 170px;
+	border: 2px solid #fff;
+}
+#userLowerSection{
+	font-size: .85em;
+}
+#fechaIncorporacion, #fechaRegistro, #fechaCancelacion{
+	background-color : #428BCA;
+	color: #fff;
+}
+.blue-icon{
+	color: #428BCA;
+}
+.declaraciones-alerta {
+	background: rgba(161,28,54,0.90); 
+	border: 1px solid #979797;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+	color: #fff;
+}
+.text-declaracion-alerta{
+	font-size: 3em;
+}
+.icon-color{
+	
+	color: rgba(173,80,98,0.90);
+}
+#tableRegistro > tbody > tr > td:nth-child(2){
+	color: rgba(161,28,54,0.90); 
+}
