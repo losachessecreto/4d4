@@ -21,6 +21,7 @@ public class User {
     public String father_lastname;
     public String mother_lastname;
     public String given_name;
+    public String position;
     public Date register_date;
     public Date last_modification_date;
     public Integer last_user_modified;
@@ -32,8 +33,8 @@ public class User {
     }
 
     public User(Integer id, String user, char[] password, String mail, String father_lastname, 
-            String mother_lastname, String given_name, Date register_date, Date last_modification_date, 
-            Integer last_user_modified, Date last_access_date, String last_ip) {
+            String mother_lastname, String given_name, String position, Date register_date, 
+            Date last_modification_date, Integer last_user_modified, Date last_access_date, String last_ip) {
         this.id = id;
         this.user = user;
         this.password = password;
@@ -41,6 +42,7 @@ public class User {
         this.father_lastname = father_lastname;
         this.mother_lastname = mother_lastname;
         this.given_name = given_name;
+        this.position = position;
         this.register_date = register_date;
         this.last_modification_date = last_modification_date;
         this.last_user_modified = last_user_modified;
@@ -103,6 +105,14 @@ public class User {
 
     public void setGiven_name(String given_name) {
         this.given_name = given_name;
+    }
+    
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Date getRegister_date() {

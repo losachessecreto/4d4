@@ -24,7 +24,7 @@ public class ApplicationConfig extends Application {
     @Inject
     public ApplicationConfig(ServiceLocator serviceLocator) {
         System.out.println("Registering injectables...");
-
+        
         DynamicConfiguration dc = Injections.getConfiguration(serviceLocator);
 
         // singleton binding
@@ -57,6 +57,8 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(loshs.registro3de3.server.CORSFilter.class);
+        resources.add(loshs.registro3de3.server.resources.StatementsResource.class);
         resources.add(loshs.registro3de3.server.resources.UsersResource.class);
     }
 
