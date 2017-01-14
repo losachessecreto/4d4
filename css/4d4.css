@@ -25,9 +25,10 @@ body {
   font-size: 1.2vw;
   text-decoration: none;
   height: 100%;
+  overflow-x: hidden;
 }
 body.not-login{	
-  padding-top: 70px;
+  padding-top: 110px;
 }
 body.body-login{
 	padding-top: 52px;
@@ -180,8 +181,9 @@ body.body-login{
 }
 .footer{
 	bottom: 0;
-	position: absolute;
+	position: relative;
 }
+
 .onda-footer{
 	width: 100%;
 }
@@ -248,9 +250,6 @@ body.body-login{
 #navbar2 > ul > li:nth-child(6){
 	border-left: 10px solid #fff;
 }
-.send-button-row-container {
-	padding-top: 45px;
-}
 #tableUsuarios_wrapper{
 	padding-top: 30px;
 }
@@ -288,4 +287,10 @@ body.body-login{
 }
 #tableRegistro > tbody > tr > td:nth-child(2){
 	color: rgba(161,28,54,0.90); 
+}
+.logo-3d3{
+	width: 120px;
+}
+.nav-active{
+	text-decoration: underline;
 }
