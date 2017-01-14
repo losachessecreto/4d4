@@ -1,34 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package loshs.registro3de3.server.beans;
 
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author hugo
- */
 @XmlRootElement
 public class Statement {
-    public Integer id;
-    public Integer user;
-    public String user_name;
-    public String user_position;
-    public Short type;
-    public Short status;
-    public Date date;
-    public String entity;
-    public String folio_number;
+    private Integer id;
+    private Integer user;
+    private String user_name;
+    private String user_position;
+    private Short type;
+    private Short status;
+    private Date date;
+    private String entity;
+    private String folio_number;
    
     public Statement(){
 
     }
 
-    public Statement(Integer id, Integer user, String user_name, String user_position, Short type, Short status, Date date, String entity, String folio_number) {
+    public Statement(Integer id, Integer user, String user_name, String user_position, 
+            Short type, Short status, Date date, String entity, /*From user*/
+            String folio_number) {
         this.id = id;
         this.user = user;
         this.user_name = user_name;
@@ -36,7 +29,7 @@ public class Statement {
         this.type = type;
         this.status = status;
         this.date = date;
-        this.entity = entity;
+        this.entity = entity; // From user
         this.folio_number = folio_number;
     }
 

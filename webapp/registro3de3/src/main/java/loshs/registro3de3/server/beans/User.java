@@ -1,47 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package loshs.registro3de3.server.beans;
 
 import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author hugo
- */
 @XmlRootElement
 public class User {
-    public Integer id;
-    public String user;
-    public char[] password;
-    public String mail;
-    public String father_lastname;
-    public String mother_lastname;
-    public String given_name;
-    public String position;
-    public Date register_date;
-    public Date last_modification_date;
-    public Integer last_user_modified;
-    public Date last_access_date;
-    public String last_ip;
-   
-    public User(){
+
+    private Integer id;
+    private String rfc;
+    private String user;
+    private char[] password;
+    private String mail;
+    private String father_lastname;
+    private String mother_lastname;
+    private String given_name;
+    private String city;
+    private String entity;
+    private String position;
+    private Date register_date;
+    private Date last_modification_date;
+    private Integer last_user_modified;
+    private Date last_access_date;
+    private String last_ip;
+
+    public User() {
 
     }
 
-    public User(Integer id, String user, char[] password, String mail, String father_lastname, 
-            String mother_lastname, String given_name, String position, Date register_date, 
+    public User(Integer id, String rfc, String user, /*char[] password,*/ String mail, String father_lastname,
+            String mother_lastname, String given_name, String city, String entity, String position, Date register_date,
             Date last_modification_date, Integer last_user_modified, Date last_access_date, String last_ip) {
         this.id = id;
+        this.rfc = rfc;
         this.user = user;
-        this.password = password;
+        //this.password = password;
+        //this.password = null;
         this.mail = mail;
         this.father_lastname = father_lastname;
         this.mother_lastname = mother_lastname;
         this.given_name = given_name;
+        this.city = city;
+        this.entity = entity;
         this.position = position;
         this.register_date = register_date;
         this.last_modification_date = last_modification_date;
@@ -49,7 +48,6 @@ public class User {
         this.last_access_date = last_access_date;
         this.last_ip = last_ip;
     }
-    
 
     public Integer getId() {
         return id;
@@ -57,6 +55,14 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
     }
 
     public String getUser() {
@@ -67,6 +73,7 @@ public class User {
         this.user = user;
     }
 
+    
     public char[] getPassword() {
         return password;
     }
@@ -74,7 +81,7 @@ public class User {
     public void setPassword(char[] password) {
         this.password = password;
     }
-
+    
     public String getMail() {
         return mail;
     }
@@ -105,6 +112,22 @@ public class User {
 
     public void setGiven_name(String given_name) {
         this.given_name = given_name;
+    }
+    
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
     }
     
     public String getPosition() {
@@ -154,5 +177,5 @@ public class User {
     public void setLast_ip(String last_ip) {
         this.last_ip = last_ip;
     }
-    
+
 }

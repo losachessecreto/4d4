@@ -25,11 +25,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import loshs.registro3de3.server.beans.DatasourceContainer;
 import loshs.registro3de3.server.beans.HTTPJsonResponseObject;
-import loshs.registro3de3.server.beans.User;
 
-/**
- * Root resource (exposed at "myresource" path)
- */
+
 @ManagedBean
 @Path("statements")
 public class StatementsResource {
@@ -57,7 +54,7 @@ public class StatementsResource {
             st = conn.createStatement();
             rs = st.executeQuery("SELECT s.id, s.user, u.user as user_name, "
                     + "u.position as user_position, s.type, s.status, s.date, "
-                    + "s.entity, s.folio_number "
+                    + "u.entity, s.folio_number "
                     + "FROM statements s JOIN users u ON s.user = u.id "
                     + "WHERE s.status >= 0 AND u.status >= 0 "
                     + "ORDER BY s.id");
@@ -111,7 +108,7 @@ public class StatementsResource {
             conn = dsc.getDatasource().getConnection();
             st = conn.prepareStatement("SELECT s.id, s.user, u.user as user_name, "
                     + "u.position as user_position, s.type, s.status, s.date, "
-                    + "s.entity, s.folio_number "
+                    + "u.entity, s.folio_number "
                     + "FROM statements s JOIN users u ON s.user = u.id "
                     + "WHERE s.status >= 0 AND u.status >= 0 AND s.id = ?");
             st.setLong(1, statementId);
@@ -163,8 +160,8 @@ public class StatementsResource {
         try {
             conn = dsc.getDatasource().getConnection();
             st = conn.prepareStatement("INSERT INTO statements("
-                    + "status, folio_number, \"user\", type, date, entity) "
-                    + "VALUES (?, ?, ?, ?, ?, ?) RETURNING id");
+                    + "status, folio_number, \"user\", type, date) "
+                    + "VALUES (?, ?, ?, ?, ?) RETURNING id");
             st.setShort(1, statement.getStatus());
             st.setString(2, statement.getFolio_number());
             st.setInt(3, statement.getUser());
@@ -174,7 +171,6 @@ public class StatementsResource {
             } else {
                 st.setNull(5, Types.DATE);
             }
-            st.setString(6, statement.getEntity());
             rs = st.executeQuery();
             if (rs.next()) {
                 return Response.ok(rs.getString("id")).build();
@@ -283,5 +279,13 @@ public class StatementsResource {
         }
     }
 
+    
+    @Path("/fromUser/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserStatements(@PathParam("id") long userId) {
+        return Response.status(Status.NOT_IMPLEMENTED).entity(new HTTPJsonResponseObject(501, "Not Implemented",
+                                "Método no implementado aún")).build();
+    }
 
 }

@@ -28,9 +28,6 @@ import loshs.registro3de3.server.beans.HTTPJsonResponseObject;
 import loshs.registro3de3.server.beans.Registro3de3Exception;
 import loshs.registro3de3.server.beans.User;
 
-/**
- * Root resource (exposed at "myresource" path)
- */
 @ManagedBean
 @Path("users")
 public class UsersResource {
@@ -60,12 +57,15 @@ public class UsersResource {
             while (rs.next()) {
                 User user = new User(
                         rs.getInt("id"),
+                        rs.getString("rfc"),
                         rs.getString("user"),
-                        rs.getString("password").toCharArray(),
+                        //rs.getString("password").toCharArray(),
                         rs.getString("mail"),
                         rs.getString("father_lastname"),
                         rs.getString("mother_lastname"),
                         rs.getString("given_name"),
+                        rs.getString("city"),
+                        rs.getString("entity"),
                         rs.getString("position"),
                         rs.getTimestamp("register_date") != null ? new Date(rs.getTimestamp("register_date").getTime()) : null,
                         rs.getTimestamp("last_modification_date") != null ? new Date(rs.getTimestamp("last_modification_date").getTime()) : null,
@@ -124,12 +124,15 @@ public class UsersResource {
             if (rs.next()) {
                 user = new User(
                         rs.getInt("id"),
+                        rs.getString("rfc"),
                         rs.getString("user"),
-                        rs.getString("password").toCharArray(),
+                        //rs.getString("password").toCharArray(),
                         rs.getString("mail"),
                         rs.getString("father_lastname"),
                         rs.getString("mother_lastname"),
                         rs.getString("given_name"),
+                        rs.getString("city"),
+                        rs.getString("entity"),
                         rs.getString("position"),
                         rs.getTimestamp("register_date") != null ? new Date(rs.getTimestamp("register_date").getTime()) : null,
                         rs.getTimestamp("last_modification_date") != null ? new Date(rs.getTimestamp("last_modification_date").getTime()) : null,
@@ -174,52 +177,54 @@ public class UsersResource {
         try {
             conn = dsc.getDatasource().getConnection();
             st = conn.prepareStatement("INSERT INTO users("
-                    + "\"user\", password, mail, father_lastname, mother_lastname, given_name,"
-                    + "position, register_date, last_modification_date, last_user_modified, "
+                    + "rfc, \"user\", password, mail, father_lastname, mother_lastname, given_name,"
+                    + "city, entity, position, register_date, last_modification_date, last_user_modified, "
                     + "last_access_date, last_ip)"
-                    + "VALUES (?, ?, ?, ?, ?, "
-                    + "?, ?, ?, ?, ?,"
+                    + "VALUES (?, ?, ?, ?, ?, ?, "
+                    + "?, ?, ?, ?, ?, ?, ?, "
                     + "?, ?) RETURNING id");
-            st.setString(1, user.getUser());
+            st.setString(1, user.getRfc());
+            st.setString(2, user.getUser());
             if (user.getPassword() != null) {
-                st.setString(2, new String(user.getPassword()));
+                st.setString(3, new String(user.getPassword()));
             } else {
-                st.setNull(2, Types.VARCHAR);
+                st.setNull(3, Types.VARCHAR);
             }
-            
-            st.setString(3, user.getMail());
-            st.setString(4, user.getFather_lastname());
-            st.setString(5, user.getMother_lastname());
-            st.setString(6, user.getGiven_name());
-            st.setString(7, user.getPosition());
+            st.setString(4, user.getMail());
+            st.setString(5, user.getFather_lastname());
+            st.setString(6, user.getMother_lastname());
+            st.setString(7, user.getGiven_name());
+            st.setString(8, user.getCity());
+            st.setString(9, user.getEntity());
+            st.setString(10, user.getPosition());
             if (user.getRegister_date() != null) {
-                st.setDate(8, new java.sql.Date(user.getRegister_date().getTime()));
-            } else {
-                st.setNull(8, Types.DATE);
-            }
-
-            if (user.getLast_modification_date() != null) {
-                st.setDate(9, new java.sql.Date(user.getLast_modification_date().getTime()));
-            } else {
-                st.setNull(9, Types.DATE);
-            }
-
-            if (user.getLast_user_modified() != null) {
-                st.setInt(10, user.getLast_user_modified());
-            } else {
-                st.setNull(10, Types.INTEGER);
-            }
-
-            if (user.getLast_access_date() != null) {
-                st.setDate(11, new java.sql.Date(user.getLast_access_date().getTime()));
+                st.setDate(11, new java.sql.Date(user.getRegister_date().getTime()));
             } else {
                 st.setNull(11, Types.DATE);
             }
 
-            if (user.getLast_ip() != null) {
-                st.setString(12, user.getLast_ip());
+            if (user.getLast_modification_date() != null) {
+                st.setDate(12, new java.sql.Date(user.getLast_modification_date().getTime()));
             } else {
-                st.setNull(12, Types.OTHER);
+                st.setNull(12, Types.DATE);
+            }
+
+            if (user.getLast_user_modified() != null) {
+                st.setInt(13, user.getLast_user_modified());
+            } else {
+                st.setNull(13, Types.INTEGER);
+            }
+
+            if (user.getLast_access_date() != null) {
+                st.setDate(14, new java.sql.Date(user.getLast_access_date().getTime()));
+            } else {
+                st.setNull(14, Types.DATE);
+            }
+
+            if (user.getLast_ip() != null) {
+                st.setString(15, user.getLast_ip());
+            } else {
+                st.setNull(15, Types.OTHER);
             }
 
             rs = st.executeQuery();
