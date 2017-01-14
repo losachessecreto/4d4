@@ -182,8 +182,15 @@ body.body-login{
 .footer{
 	bottom: 0;
 	position: relative;
+	width: 100%;
+	font-size: 1.5em;
+	color: #183455;
 }
-
+.footer-background{
+	
+	box-shadow: 0 4px 33px 0 rgba(0,0,0,0.50);
+	background: #92C3D8;
+}
 .onda-footer{
 	width: 100%;
 }
