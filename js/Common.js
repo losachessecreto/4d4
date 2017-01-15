@@ -1,5 +1,5 @@
 var Common = {
-	apiUrl:'http://192.168.15.11:8080/registro3de3/webapi',    
+	apiUrl:'http://192.168.15.18:8080/registro3de3/webapi',    
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
 		
 		var url =Common.apiUrl + '/' + moduleUrl;
@@ -22,5 +22,16 @@ var Common = {
             	}
             }
         });
-    }
+    },
+    getParameterByName: function (name, url) {
+    	if (!url) {
+      		url = window.location.href;
+    	}
+    	name = name.replace(/[\[\]]/g, "\\$&");
+    	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    	if (!results) return null;
+    	if (!results[2]) return '';
+    	return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
 };
