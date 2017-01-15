@@ -120,7 +120,7 @@ body.body-login{
 .main-container{
 	background-color: #183455;
 	margin-top: 50px;
-	padding-top:10px;
+	padding-top:15px;
 }
 .tabs-declaraciones > li{
 	width: 50%;
@@ -254,8 +254,9 @@ body.body-login{
 #navbar2 > ul > li:nth-child(3),
 #navbar2 > ul > li:nth-child(4),
 #navbar2 > ul > li:nth-child(5),
-#navbar2 > ul > li:nth-child(6){
-	border-left: 10px solid #fff;
+#navbar2 > ul > li:nth-child(6),
+#navbar2 > ul > li:nth-child(7){
+	border-left: 4px solid #fff;
 }
 #tableUsuarios_wrapper{
 	padding-top: 30px;
@@ -304,4 +305,7 @@ body.body-login{
 .spinner {
 	height: 20px;
 	display: none;
+}
+#usuarioSelector {
+	padding-top: 5px;
 }

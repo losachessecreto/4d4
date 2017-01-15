@@ -9,14 +9,12 @@
       <link rel="stylesheet" type="text/css" href="../css/4d4.css" />
       <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
       <script src="../js/jquery-3.1.1.min.js"></script>	
-          
       <script src="../js/bootstrap.js"></script>	      
       <script src="../js/datatables.min.js"></script>	      
       <script src="../js/Common.js"></script>	    
       <script src="../js/Contralor.js"></script>	          
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-      
       <script type="text/javascript">
          $(document).ready(function() {
          	
@@ -25,44 +23,41 @@
          	}); 
          	
          	Contralor.getUsuarios();        	
-         	/*$(Contralor.tableId).dataTable({
-         			'scrollCollapse' : true,
-                	'scrollY': "250px"
-         	}); */
+			
+			$('#declaracionesMenu').click(function(e){
+				$('#declaracionesSubMenus').toggle();
+				e.preventDefault();
+				return false;
+			});
+			$('#usuariosMenu').click(function(e){
+				$('#usuariosSubMenu').toggle();
+				e.preventDefault();
+				return false;
+			});
          });
       </script>
    </head>
-   
    <body class="not-login login-container-obligado">
-   
       <div class="row-fluid">
-     	
-     	   <div class="col-md-12">
-         	<div class="btn-group pull-right" role="group" id="enviarMensajeBtnGroup">
-            	<a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
-            		<span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar Mensaje&nbsp;&nbsp;<span class="caret"></span>
-            	</a>
-                <ul class="dropdown-menu">
-                	<li><a href="#">A toda la comunidad</a></li>
-                    <li><a href="#">A personas con obligación de declaración Inicial</a></li>
-                    
-                    <li><a href="#">A personas con obligación de declaración Anual</a></li>
-                    <li><a href="#">A personas con obligación de declaración Final</a></li>
-                   
-                    <li><a href="#">A personas con alguna obligación pendiente</a></li>
-                    
-                    <li><a href="#">A Contralores</a></li>
-                    
-                    <li><a href="#">A Administradores</a></li>
-                    
-                    <li><a href="#">A los filtrados en la tabla</a></li>
-                    <li><a href="#">A personalizados</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Editar mensajes predeterminados</a></li>
-                </ul>
-            </div>                  
+         <div class="col-md-12">
+            <div class="btn-group pull-right" role="group" id="enviarMensajeBtnGroup">
+               <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
+               <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar Mensaje&nbsp;&nbsp;<span class="caret"></span>
+               </a>
+               <ul class="dropdown-menu">
+                  <li><a href="#">A toda la comunidad</a></li>
+                  <li><a href="#">A personas con obligación de declaración Inicial</a></li>
+                  <li><a href="#">A personas con obligación de declaración Anual</a></li>
+                  <li><a href="#">A personas con obligación de declaración Final</a></li>
+                  <li><a href="#">A personas con alguna obligación pendiente</a></li>
+                  <li><a href="#">A Contralores</a></li>
+                  <li><a href="#">A Administradores</a></li>
+                  <li><a href="#">A los filtrados en la tabla</a></li>
+                  <li><a href="#">A personalizados</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Editar mensajes predeterminados</a></li>
+               </ul>
+            </div>
          </div>
-      
-     
       </div>
       <div class="row">
          <div class="col-md-12"><img class="logo-3d3 center-block" alt="logo 3 de 3" src="../img/logo-3d3.png"/></div>
@@ -71,12 +66,26 @@
          <div class="row-fluid logonav container">
             <div class="navbar-header">
                <a class="navbar-brand" href="#"><img alt="Brand" id="sep-logo" src="../img/contraloria-logo-negro.png" /></a>
+                	&nbsp;&nbsp;
+                     <div class="btn-group pull-right" role="group" id="usuarioSelector">
+                        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Ver como&nbsp;&nbsp;<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="adminsSection">
+                           <li><a href="#" id="administradorPrincipalBtn">Administrador Principal</a></li>
+                           <li><a href="#" id="administradorSecundarioBtn">Administrador Secundario</a></li>                           
+                           <li><a href="#" id="administradorTerceroBtn">Administrador Tercero</a></li>                           
+                           <li><a href="#" id="administradorCuartoBtn">Administrador Cuarto</a></li>
+                        </ul>
+                     </div>
+                  
             </div>
             <div id="navbar" class="navbar-collapse collapse ">
-              <ul class="nav navbar-nav navbar-right pull-right user-area">
+               <ul class="nav navbar-nav navbar-right pull-right user-area">                 
                   <li>
                      <a href="#">Hector P. <span class="caret"></span></a>
                   </li>
+                  
                </ul>
             </div>
             <!--/.nav-collapse -->
@@ -84,14 +93,53 @@
          <div class="row-fluid menunav">
             <div id="navbar2" class="navbar-collapse collapse ">
                <ul class="nav navbar-nav">
-                  <li><a href="#">Declaraciones</a></li>
-                  <li class="nav-active"><a href="#">Usuarios</a></li>
-                  <li><a href="#">Contralores</a></li>
-                  <li><a href="#">Entidades</a></li>
-                  <li><a href="#">Impugnaciones</a></li>
-                  <li><a href="#">Reportes<span class="caret"></span></a></li>
+                  <li data-roles="1,2">
+                  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Declaraciones <span class="caret"></span></a>
+                  	<ul class="dropdown-menu">
+                           <li><a href="#">Catálogo</a></li>
+                           <li data-roles="1"><a href="#">Cancelaciones</a></li>                           
+                           <li><a href="#">Correcciones</a></li>    
+                    </ul>
+                  </li>
+                  <li data-roles="1,2"><a href="#">Dependencias</a></li>
+                  <li data-roles="1,2"><a href="#">Verificaciones</a></li>
+                  <li data-roles="1,2"><a href="#">Investigaciones</a></li>                
+                  <li>
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <span class="caret"></span></a>
+                  		<ul class="dropdown-menu">
+                  		   <li>
+                  		   		<a href="javascript:void(0);" id="declaracionesMenu" ><span class="glyphicon glyphicon-option-horizontal"></span> Declaraciones </a>
+                  		   		<ul style="display:none" id="declaracionesSubMenus">
+                  		   			<li><a href="#">General</a></li>
+                           			<li><a href="#">Obligados</a></li>                           
+                           			<li><a href="#">Incumplimientos</a></li>                           
+                           			<li><a href="#">Extemporáneas</a></li>                           
+                           			<li><a href="#">Recibidas</a></li>                           
+                           			<li><a href="#">Canceladas</a></li>                           
+                           			<li><a href="#">Corregidos</a></li>                           
+                           			<li><a href="#">Histórico</a></li>
+                  		   		</ul>
+                  		   </li>    
+                  		    <li>
+                  			<a  href="javascript:void(0);"  id="usuariosMenu"><span class="glyphicon glyphicon-user"></span> Usuarios </a>
+                  				<ul style="display:none"  id="usuariosSubMenu">
+                           			<li><a href="#">Todos los obligados</a></li>
+                           			<li><a href="#">Individual</a></li>                           
+                           			<li><a href="#">Cumplimiento de Titulares</a></li>                           
+                           			<li><a href="#">Eliminados</a></li>                           
+                           			<li><a href="#">Impugnaciones</a></li>                           
+                           			<li><a href="#">Defunciones</a></li>   
+                        		</ul>
+                  </li>                       
+                        </ul>
+                  </li>
+                  <li>
+                  		<a class="nav-active" href="#">Usuarios </a>
+                  		
+                  </li> 
+                  <li><a href="#">Histórico de movimientos</a></li> 
                </ul>
-               <ul class="nav navbar-nav navbar-right pull-right hidden-sm hidden-xs user-area">
+               <ul class="nav navbar-nav navbar-right pull-right user-area">               
                   <li>
                      <a href="/logoutUser">Cerrar Sesión&nbsp;&nbsp;&nbsp;</a>
                   </li>
@@ -101,7 +149,6 @@
          </div>
       </nav>
       <div class="container main-container">
-      
          <div class="row">
             <div class="col-md-12">
                <div class="panel panel-info">
@@ -111,7 +158,19 @@
                   <div class="panel-body">
                      <div class="row">
                         <div class="col-sm-10">
-                           <div class="btn-group pull-right" role="group">
+                        	<div class="pull-right">
+                        		<div class="btn-group " role="group">
+                              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              	
+                              	Estatus
+                              <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                 <li><a href="#">Activo</a></li>
+                                 <li><a href="#">Ináctivo</a></li>
+                              </ul>
+                           </div>
+                        		<div class="btn-group " role="group">
                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="glyphicon glyphicon-download-alt"></span>
                               Exportar
@@ -123,6 +182,7 @@
                                  <li><a href="#">PDF</a></li>
                               </ul>
                            </div>
+                            </div>
                         </div>
                         <div class="col-sm-2">
                            <a href="#" class="btn btn-danger pull-right">Agregar Obligado <span class="glyphicon glyphicon-plus"></span></a>
@@ -153,18 +213,21 @@
                                  <td>Guadalajara</td>
                                  <td>mariarj</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Héctor Herrera Pérez</td>
@@ -174,7 +237,6 @@
                                  <td>Guadalajara</td>
                                  <td>hectorhp</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
                                  <td >
                                     <div class="btn-group pull-right" role="group">
@@ -183,7 +245,9 @@
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
                                     </div>
@@ -197,18 +261,21 @@
                                  <td>Guadalajara</td>
                                  <td>marikh</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Ana Cecilia González</td>
@@ -218,18 +285,21 @@
                                  <td>Guadalajara</td>
                                  <td>anacecig</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="icon-6 danger pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Jorge Horacio Pedroza</td>
@@ -239,18 +309,21 @@
                                  <td>Guadalajara</td>
                                  <td>jorgehp</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="icon-6 danger pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Karla Azizza</td>
@@ -260,18 +333,21 @@
                                  <td>Guadalajara</td>
                                  <td>karlazi</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Hugo Ramos</td>
@@ -281,18 +357,21 @@
                                  <td>Guadalajara</td>
                                  <td>hugora</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Hugo Labra</td>
@@ -302,18 +381,21 @@
                                  <td>Guadalajara</td>
                                  <td>hugola</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Óscar Dávalos</td>
@@ -323,18 +405,21 @@
                                  <td>Guadalajara</td>
                                  <td>oscarda</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                               <tr>
                                  <td>Ricardo Salinas</td>
@@ -344,18 +429,21 @@
                                  <td>Guadalajara</td>
                                  <td>ricardosa</td>
                                  <td>RFC123HJAS1</td>
-                                 
                                  <td><span class="glyphicon glyphicon-ok success pull-right"></span></td>
-                                 <td ><div class="btn-group pull-right" role="group">
+                                 <td >
+                                    <div class="btn-group pull-right" role="group">
                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        <span class="glyphicon glyphicon-cog"></span>
                                        </button>
                                        <ul class="dropdown-menu">
                                           <li><a href="#">Editar</a></li>
-                                          <li><a href="#">Ver reporte de usuario</a></li><li><a href="#">Impugnar</a></li><li><a href="#">Desincorporar por defunción</a></li>
+                                          <li><a href="#">Ver reporte de usuario</a></li>
+                                          <li><a href="#">Impugnar</a></li>
+                                          <li><a href="#">Desincorporar por defunción</a></li>
                                           <li><a href="#">Eliminar</a></li>
                                        </ul>
-                                    </div></td>
+                                    </div>
+                                 </td>
                               </tr>
                            </tbody>
                         </table>
@@ -385,15 +473,15 @@
          </div>
       </div>
       <footer class="footer footer-background">
-      <div class="row">
-        <div class="col-md-12">
-			<div class="row-fluid">
-        		<div class="col-md-12">        		        			
- 			       	<img alt="logo de LOSHS" src="../img/loshs-mini-blanco.png" class="pull-right" />
-        		</div>
-        	</div>
-        </div>
-      </div>
-    </footer>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="row-fluid">
+                  <div class="col-md-12">        		        			
+                     <img alt="logo de LOSHS" src="../img/loshs-mini-blanco.png" class="pull-right" />
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
    </body>
 </html>

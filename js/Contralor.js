@@ -3,7 +3,7 @@ var Contralor = {
 	tableId: '#tableUsuarios',
 	getUsuarios : function () {
 		
-    	Common.makeAPICall(null, 'users', 'GET', Contralor.getUsuariosCompleted);
+    	Common.makeAPICall(null, 'users', 'GET', Contralor.getUsuariosCompleted, null, Contralor.loadTable);
     },
     getUsuario: function (usuarioId) {
     	if(!!usuarioId) {
@@ -43,11 +43,8 @@ var Contralor = {
     													+ '</tr>');    			    			        	
     		});
     		
-    		$(Contralor.tableId).dataTable({
-         			'scrollCollapse' : true,
-                	'scrollY': "250px"
-         	}); 
     	}
+    	Contralor.loadTable();
     },
     parseApiUsuario: function(usuario) {
     	
@@ -65,5 +62,12 @@ var Contralor = {
     			};
     			
     	return tableUser;	
+    },
+    loadTable: function() {
+    	
+    	$(Contralor.tableId).dataTable({
+        	'scrollCollapse' : true,
+            'scrollY': "250px"
+         }); 
     }
 };
