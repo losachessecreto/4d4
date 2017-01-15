@@ -301,3 +301,7 @@ body.body-login{
 .nav-active{
 	text-decoration: underline;
 }
+.spinner {
+	height: 20px;
+	display: none;
+}

@@ -3,7 +3,7 @@ var Common = {
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
 		
 		var url =Common.apiUrl + '/' + moduleUrl;
-		
+		$('.spinner').show();
     	$.ajax({    	
             method: method,
 			url: url,
@@ -13,13 +13,15 @@ var Common = {
 	            console.log('error');
             	if(!!errorCallback) {
 	            	errorCallback(data, errorParams);
-            	}            	
+            	}            
+            	$('.spinner').hide();	
             },
             success: function (data) {
 	        	
             	if(!!successCallback) {            		
 	                successCallback(data, successParams);
             	}
+            	$('.spinner').hide();
             }
         });
     },

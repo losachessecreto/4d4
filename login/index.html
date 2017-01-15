@@ -25,6 +25,15 @@
       </style>
    </head>
    <body class="login-container body-login">
+   <div class="row-fluid" style="display:none" id="loginMessageDiv">
+   		<br />
+   		<div class="col-md-12">   		
+			<div class="alert alert-danger alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  				<span id="loginMessage">Usuario o contraseña incorrectos, por favor, revise sus credenciales.</span>
+			</div>
+		</div>
+   </div>
       <nav class="navbar navbar-default navbar-fixed-top">
          <div class="row-fluid logonav container ">
             <div id="navbar" class="navbar-collapse collapse ">
@@ -71,7 +80,9 @@
                   </div>
                </div>
                <div class="col-sm-7">
-                  <a class="btn btn-primary pull-right" href="#" id="inicieSesion">Inicie Sesión</a>
+               	  <div class="pull-right">
+                  	<a class="btn btn-primary " href="#" id="inicieSesion">Inicie Sesión</a>&nbsp;<img class="spinner " alt="spinner" src="../img/spinner.gif" />
+               	  </div>
                </div>
             </div>
          </div>
