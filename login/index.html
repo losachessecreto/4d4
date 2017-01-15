@@ -71,7 +71,7 @@
                   </div>
                </div>
                <div class="col-sm-7">
-                  <a class="btn btn-primary pull-right" href="#" id="iniciaSesion">Inicie Sesión</a>
+                  <a class="btn btn-primary pull-right" href="#" id="inicieSesion">Inicie Sesión</a>
                </div>
             </div>
          </div>
@@ -96,8 +96,8 @@
       $(document).ready(function() {
       		ko.applyBindings(viewModel);
           	
-          	$('#iniciaSesion').click(function(){
-          		debugger;
+          	$('#inicieSesion').click(function(){
+          		
       	    	Login.authenticate(viewModel.username(), viewModel.userPassword());            	
           	});
           	

@@ -4,10 +4,7 @@ var Login = {
     	
     	if(!!username && !!password) {
     		
-	    	Common.makeAPICall({'user': username, 'password': password}, 'login', 'POST', Login.loginResponseCompleted, Login.loginResponseCompleted);
+	    	Common.makeAPICall({'user': username, 'password': password}, 'login', 'POST');
     	}
-    },
-    loginResponseCompleted: function(data) {
-    	document.location.href = '../declaraciones/index.html';
-    }    
+    }
 };
