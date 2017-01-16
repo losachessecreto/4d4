@@ -57,7 +57,7 @@ $(document).ready(function() {
 		});
 	});
 		
-    $('#enviarMensajeBtn').click(function(e){
+    $('#enviarMensajeBtnGroup ul li').click(function(e){
     	$('#mensajesModal').modal();
     });          		
         
@@ -67,4 +67,8 @@ $(document).ready(function() {
 		e.preventDefault();
 		return false;
 	});	
+	$('[name="downloadFile"]').click(function() {
+		$('form').attr('action', 'http://192.168.1.66:8080/registro3de3/webapi/files');
+		$('form').submit();
+	});
 });

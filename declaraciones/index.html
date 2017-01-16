@@ -66,7 +66,7 @@
          <div class="row-fluid logonav container">
             <div class="navbar-header">
                <a class="navbar-brand" href="#"><img alt="Brand" id="sep-logo" src="../img/contraloria-logo-negro.png" /></a>
-               &nbsp;&nbsp;
+                	&nbsp;&nbsp;
                      <div class="btn-group pull-right" role="group" id="usuarioSelector">
                         <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
                         <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;<span id="selectedAdmin">Ver como</span>&nbsp;&nbsp;<span class="caret"></span>
@@ -80,11 +80,15 @@
                      </div>
                   
             </div>
-            <div id="navbar" class="navbar-collapse collapse ">               
-               <ul class="nav navbar-nav navbar-right pull-right user-area">
+            <div id="navbar" class="navbar-collapse collapse ">
+               <ul class="nav navbar-nav navbar-right pull-right user-area">                 
                   <li>
-                     <a href="#">Hector P. <span class="caret"></span></a>
+                  	 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hector P. <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                           <li><a href="#">Cambiar contraseña</a></li>    
+                    </ul>
                   </li>
+                  
                </ul>
             </div>
             <!--/.nav-collapse -->
@@ -148,7 +152,7 @@
                   </li> 
                   <li name="filtrable" data-roles="1"><a href="#">Histórico de movimientos</a></li> 
                </ul>
-               <ul class="nav navbar-nav navbar-right pull-right hidden-sm hidden-xs user-area">
+               <ul class="nav navbar-nav navbar-right pull-right user-area">               
                   <li>
                      <a href="/logoutUser">Cerrar Sesión&nbsp;&nbsp;&nbsp;</a>
                   </li>

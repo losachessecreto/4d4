@@ -5,7 +5,7 @@
       <title>Registro 3 de 3</title>
       <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
       <link rel="stylesheet" type="text/css" href="../css/datatables.min.css" />
-      <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" /
+      <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
       <link rel="stylesheet" type="text/css" href="../css/devicons.css" />
       <link rel="stylesheet" type="text/css" href="../css/4d4.css" />
       <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
@@ -13,6 +13,9 @@
       <script src="../js/bootstrap.min.js"></script>	
       
       <script src="../js/datatables.min.js"></script>	
+      
+      <script src="../js/Common.js"></script>	
+      
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
       
@@ -180,7 +183,7 @@
                            <td >1</td>
                            <td >16 de Agosto del 2016</td>
                            <td >&nbsp;&nbsp;&nbsp;<span class="icon-1"></span></td>
-                           <td ><a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Ver Archivos</a></td>
+                           <td ><a href="#" name="downloadFile" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-download-alt"></span> Ver Archivos</a></td>
                            <td ><a href="#" data-toggle="tooltip" title="Ver constancia de declaración">123456789</a></td>
                            <td>
                         		<div class="btn-group pull-right" role="group">
@@ -283,6 +286,8 @@
         </div>
       </div>
     </footer>
+    
+   <form method="get" action="" id="fileDownloader">
    </body>
    
    	<script type="text/javascript">
