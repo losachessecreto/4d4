@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
                 .to(PasswordHasher.class).in(Singleton.class), dc);
         Injections.addBinding(Injections.newBinder(new PasswordHasher())
                 .to(PasswordHasher.class), dc);
+       
 
         dc.commit();
     }
@@ -49,6 +50,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(loshs.registro3de3.server.AuthorizationFilter.class);
         resources.add(loshs.registro3de3.server.CORSFilter.class);
+        resources.add(loshs.registro3de3.server.resources.FilesResource.class);
         resources.add(loshs.registro3de3.server.resources.LoginResource.class);
         resources.add(loshs.registro3de3.server.resources.LogoutResource.class);
         resources.add(loshs.registro3de3.server.resources.StatementsResource.class);
