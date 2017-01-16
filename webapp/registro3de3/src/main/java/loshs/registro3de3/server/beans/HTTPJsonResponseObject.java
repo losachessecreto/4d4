@@ -4,9 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class HTTPJsonResponseObject {
-    public Integer status_code;
-    public String status_message;
-    public String message;
+    private Integer status_code;
+    private String status_message;
+    private String message;
+    private Boolean success;
     
     public HTTPJsonResponseObject(){
 
@@ -16,6 +17,13 @@ public class HTTPJsonResponseObject {
         this.status_code = status_code;
         this.status_message = status_message;
         this.message = message;
+    }
+    
+    public HTTPJsonResponseObject(Integer status_code, String status_message, String message, Boolean success) {
+        this.status_code = status_code;
+        this.status_message = status_message;
+        this.message = message;
+        this.success = success;
     }
 
     public Integer getStatus_code() {
@@ -41,5 +49,12 @@ public class HTTPJsonResponseObject {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
 }

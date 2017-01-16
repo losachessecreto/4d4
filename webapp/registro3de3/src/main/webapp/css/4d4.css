@@ -1,0 +1,311 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+
+Project    	: Aether
+Version		: 1.0
+Last change	: 2015/03/27
+-------------------------------------------------------------------*/
+/*------------------------------------------------------------------
+[Table of contents]
+
+1. General Structure
+2. Anchor Link
+3. Text Outside the Box
+4. Main Form
+5. Login Button
+6. Form Invalid
+7. Form - Main Message
+8. Custom Checkbox & Radio
+9. Miscww
+-------------------------------------------------------------------*/
+/*=== 1. General Structure ===*/
+html,
+body { 
+  background: #efefef;
+  font-size: 1.2vw;
+  text-decoration: none;
+  height: 100%;
+  overflow-x: hidden;
+}
+body.not-login{	
+  padding-top: 110px;
+}
+body.body-login{
+	padding-top: 52px;
+}
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?q3yi85');
+  src:  url('../fonts/icomoon.eot?q3yi85#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?q3yi85') format('truetype'),
+    url('../fonts/icomoon.woff?q3yi85') format('woff'),
+    url('../fonts/icomoon.svg?q3yi85#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-1:before {
+  content: "\e900";
+}
+.icon-2:before {
+  content: "\e901";
+}
+.icon-3:before {
+  content: "\e902";
+}
+.icon-4:before {
+  content: "\e903";
+}
+.icon-5:before {
+  content: "\e904";
+}
+.icon-6:before {
+  content: "\e905";
+}
+.icon-7:before {
+  content: "\e906";
+}
+.icon-8:before {
+  content: "\e907";
+}
+.icon-9:before {
+  content: "\e908";
+}
+.icon-10:before {
+  content: "\e909";
+}
+.icon-91:before {
+  content: "\e90a";
+}
+.icon-93:before {
+  content: "\e90b";
+}
+/*=== 2. Anchor Link ===*/
+.navbar{
+
+	background: #D8D8D8;
+}
+.navbar-default .navbar-nav > li > a {
+	color:#fff;
+}
+
+.navbar-default div.logonav .navbar-nav > li > a {
+	color:#183455;
+}
+.navbar-brand{	
+	padding-top: 5px;	
+	padding-bottom: 5px;	
+	border-left: 5px solid #979797;
+	
+	border-right: 5px solid #979797;
+}
+.navbar-brand > img{
+	height: 100%;
+}
+.main-container{
+	background-color: #183455;
+	margin-top: 50px;
+	padding-top:15px;
+}
+.tabs-declaraciones > li{
+	width: 50%;
+}
+.nav-tabs> li.active > a.tab-declaracion-requerida, .tab-declaracion-requerida {
+	background-color: #428BCA;
+	color: #fff;
+}
+.nav-tabs> li.active > a.tab-declaracion-preventiva, .tab-declaracion-preventiva {
+	background-color: #85B1D2;
+	color: #fff;
+}
+.logonav{
+	background: #D8D8D8;
+}
+
+.logonav > a{
+	color: #000;
+}
+.menunav{
+	background-color: #183455;
+}
+.login-container{
+ 
+  background: rgba(112,178,224,1);  /*For brow-fluidsers that do not support gradients*/ 
+  background: -webkit-linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /*Safari 5.1-6*/
+  background: -o-linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /*Opera 11.1-12*/
+  background: -moz-linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /*Fx 3.6-15*/
+  background: linear-gradient(rgba(112,178,224,1), rgba(77,123, 155, 1)); /*Standard*/
+}
+.login-container-obligado{
+
+  background-image: url("../img/mesatrabajo.png"), linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /* W3C */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 0px 30px;
+}
+.login-body{
+	padding-top:30px;
+}
+.modal-login{
+	display: block;
+	padding-top: 20%;
+}
+.login-logo{
+	height: 120px;
+	width: 37%;
+}
+.login-form{
+	width: 40%;
+	margin-top: 5%;
+	padding: 2%;
+	background: #85B1D2;
+	color: #183455;
+}
+.login-pwd-leyenda{
+	color: #fff;
+}
+.footer{
+	bottom: 0;
+	position: relative;
+	width: 100%;
+	font-size: 1.5em;
+	color: #183455;
+}
+.footer-background{
+	
+	box-shadow: 0 4px 33px 0 rgba(0,0,0,0.50);
+	background: #92C3D8;
+}
+.onda-footer{
+	width: 100%;
+}
+.panel-declaraciones{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	background: #fff;
+}
+.panel-acciones{
+	padding: 20px;
+}
+.usuario-foto-perfil{
+	width: 80px;
+	height: 80px;
+}
+.usuario-panel-data{
+	background:#D3DEE7;
+	padding-top: 10px;
+}
+.usuario-panel-fechas{
+	border-left: 10px solid;
+}
+#tableAcciones > tbody > tr > td:nth-child(3){
+	text-align: center;
+	font-size: 26px;
+}
+#tableAcciones > tbody > tr > td:nth-child(4) > a{	
+	font-size: 12px;
+}
+.icon-declaraciones{
+	font-size:40px;
+	text-align:center;
+	color: #428BCA;
+}
+.medium-icon{
+	font-size: 2em;
+}
+.success{
+	color: green;
+}
+.info{
+	color: rgba(121,190,230, 1);
+}
+.warning{
+
+	color: rgba(240,216,120, 1);
+}
+.danger{
+
+	color: rgba(254,64,66, 1);
+}
+.boton-grid{
+	width: 80%;
+}
+.navbar-default .navbar-nav>li>a:hover{
+	color: #fff;
+	text-decoration: underline;
+}
+
+#navbar2 > ul > li:nth-child(2),
+#navbar2 > ul > li:nth-child(3),
+#navbar2 > ul > li:nth-child(4),
+#navbar2 > ul > li:nth-child(5),
+#navbar2 > ul > li:nth-child(6),
+#navbar2 > ul > li:nth-child(7){
+	border-left: 4px solid #fff;
+}
+#tableUsuarios_wrapper{
+	padding-top: 30px;
+}
+.usuario-panel-data-admin{
+	background-color: #183455;	
+	color: #fff;
+}
+.usuario-foto-perfil-admin{
+	width: 170px;
+	height: 170px;
+	border: 2px solid #fff;
+}
+#userLowerSection{
+	font-size: .85em;
+}
+#fechaIncorporacion, #fechaRegistro, #fechaCancelacion{
+	background-color : #428BCA;
+	color: #fff;
+}
+.blue-icon{
+	color: #428BCA;
+}
+.declaraciones-alerta {
+	background: rgba(161,28,54,0.90); 
+	border: 1px solid #979797;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+	color: #fff;
+}
+.text-declaracion-alerta{
+	font-size: 3em;
+}
+.icon-color{
+	
+	color: rgba(173,80,98,0.90);
+}
+#tableRegistro > tbody > tr > td:nth-child(2){
+	color: rgba(161,28,54,0.90); 
+}
+.logo-3d3{
+	width: 120px;
+}
+.nav-active{
+	text-decoration: underline;
+}
+.spinner {
+	height: 20px;
+	display: none;
+}
+#usuarioSelector {
+	padding-top: 5px;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="es" >
+   <head>
+      <!-- All the files that are required -->
+      <title>Registro 3 de 3</title>
+      <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="../css/4d4.css" />
+      <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+      <script src="../js/jquery-3.1.1.min.js"></script>	
+      <script src="../js/bootstrap.min.js"></script>	
+      <script src="../js/knockout.min.js"></script>	
+      <script src="../js/Common.js"></script>	    
+      <script src="../js/login.js"></script>	  
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <style>
+         @font-face {
+         font-family: "Compass";
+         src: url('../fonts/Compass.ttf') format("truetype");
+         }
+         body { 
+         font-family: "Compass";
+         overflow: hidden;	
+         }
+      </style>
+   </head>
+   <body class="login-container body-login">
+   <div class="row-fluid" style="display:none" id="loginMessageDiv">
+   		<br />
+   		<div class="col-md-12">   		
+			<div class="alert alert-danger alert-dismissible" role="alert">
+  				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  				<span id="loginMessage">Usuario o contraseña incorrectos, por favor, revise sus credenciales.</span>
+			</div>
+		</div>
+   </div>
+      <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="row-fluid logonav container ">
+            <div id="navbar" class="navbar-collapse collapse ">
+               <!--
+                  <ul class="nav navbar-nav navbar-test">
+                  
+                    <li><a href="/superadmin/publicaciones"><span class=""></span>&nbsp;Mural</a></li>                        
+                    <li><a href="/director/ranking"><span class=""></span>&nbsp;Ranking</a></li>
+                    
+                    
+                  </ul>-->
+               <ul class="nav navbar-nav navbar-right pull-right hidden-sm hidden-xs user-area">
+                  <li>
+                     <a href="#">Bienvenido</a>
+                  </li>
+               </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </nav>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">	
+               <img alt="login-contraloria-logo" class="login-logo center-block" src="../img/contraloria-logo.png" />
+            </div>
+         </div>
+         <div class="panel center-block login-form">
+            <div class="row">
+               <div class="col-md-12">
+                  <input type="text" id="username" class="form-control" placeholder="Nombre de usuario" data-bind="value: username" />
+               </div>
+            </div>
+            <br/>
+            <div class="row">
+               <div class="col-md-12">
+                  <input type="password" id="password" class="form-control" placeholder="Contraseña" data-bind="value: userPassword" />
+               </div>
+            </div>
+            <hr />
+            <div class="row">
+               <div class="col-sm-5">
+                  <div class="checkbox">
+                     <label><input type="checkbox" value="">Recordarme</label>
+                  </div>
+               </div>
+               <div class="col-sm-7">
+               	  <div class="pull-right">
+                  	<a class="btn btn-primary " href="#" id="inicieSesion">Inicie Sesión</a>&nbsp;<img class="spinner " alt="spinner" src="../img/spinner.gif" />
+               	  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row center-block">
+            <div class="col-sm-4 col-sm-offset-4">	
+               <label class="login-pwd-leyenda">¿Olvidó su contraseña? Haga click <a href="#" style="color:#fff;text-decoration:underline">aquí</a></label>
+            </div>
+         </div>
+      </div>
+      <footer class="footer" style="position:absolute">
+         <div class="row">        
+            <img alt="login-contraloria-logo" class="onda-footer" src="../img/onda.png" />		
+         </div>
+      </footer>
+   </body>
+   <script type="text/javascript">
+      var viewModel = {
+       username: ko.observable(''),	        
+       userPassword: ko.observable(''),
+      };
+      
+      $(document).ready(function() {
+      		ko.applyBindings(viewModel);
+          	
+          	$('#inicieSesion').click(function(){
+          		
+      	    	Login.authenticate(viewModel.username(), viewModel.userPassword());            	
+          	});
+          	
+          	$('input').keyup(function(e) {
+          		
+          		var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+      			if(key == 13) {
+      			
+	      	    	Login.authenticate(viewModel.username(), viewModel.userPassword());   
+      			}
+          	});
+       });
+   </script>
+</html>

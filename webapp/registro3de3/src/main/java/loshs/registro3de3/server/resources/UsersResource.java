@@ -37,12 +37,6 @@ public class UsersResource {
 
     static final Logger LOGGER = Logger.getLogger(UsersResource.class.getName());
 
-    /**
-     * Method handling HTTP GET requests. The returned object will be sent to
-     * the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUsers() {
@@ -92,19 +86,7 @@ public class UsersResource {
             //return Response.status(500).build();
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -152,19 +134,7 @@ public class UsersResource {
             //return Response.status(500).build();
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -242,19 +212,7 @@ public class UsersResource {
             //throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
             throw new Registro3de3Exception(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -282,19 +240,7 @@ public class UsersResource {
             LOGGER.log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -322,19 +268,7 @@ public class UsersResource {
             LOGGER.log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 

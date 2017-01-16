@@ -26,7 +26,6 @@ import javax.ws.rs.core.Response.Status;
 import loshs.registro3de3.server.beans.DatasourceContainer;
 import loshs.registro3de3.server.beans.HTTPJsonResponseObject;
 
-
 @ManagedBean
 @Path("statements")
 public class StatementsResource {
@@ -36,12 +35,6 @@ public class StatementsResource {
 
     static final Logger LOGGER = Logger.getLogger(StatementsResource.class.getName());
 
-    /**
-     * Method handling HTTP GET requests. The returned object will be sent to
-     * the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStatements() {
@@ -72,28 +65,12 @@ public class StatementsResource {
                 statementList.add(statement);
             }
             return Response.ok(statementList.toArray(new Statement[statementList.size()])).build();
-            /*
-            return Response.status(Status.NOT_IMPLEMENTED).entity(new HTTPJsonResponseObject(501, "Not Implemented",
-                                "Método no implementado aún")).build();
-             */
         } catch (SQLException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
             //return Response.status(500).build();
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -135,19 +112,7 @@ public class StatementsResource {
             LOGGER.log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -183,19 +148,7 @@ public class StatementsResource {
             LOGGER.log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -223,19 +176,7 @@ public class StatementsResource {
             LOGGER.log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
@@ -263,29 +204,49 @@ public class StatementsResource {
             LOGGER.log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (st != null) {
-                    st.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
-            }
+            dsc.close(conn, st, rs);
         }
     }
 
-    
     @Path("/fromUser/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserStatements(@PathParam("id") long userId) {
-        return Response.status(Status.NOT_IMPLEMENTED).entity(new HTTPJsonResponseObject(501, "Not Implemented",
-                                "Método no implementado aún")).build();
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            LinkedList<Statement> statementList = new LinkedList();
+            conn = dsc.getDatasource().getConnection();
+            st = conn.prepareStatement("SELECT s.id, s.user, u.user as user_name, "
+                    + "u.position as user_position, s.type, s.status, s.date, "
+                    + "u.entity, s.folio_number "
+                    + "FROM statements s JOIN users u ON s.user = u.id "
+                    + "WHERE s.status >= 0 AND u.status >= 0 AND u.id = ?");
+            st.setLong(1, userId);
+            rs = st.executeQuery();
+            while (rs.next()) {
+                Statement statement = new Statement(
+                        rs.getInt("id"),
+                        rs.getInt("user"),
+                        rs.getString("user_name"),
+                        rs.getString("user_position"),
+                        rs.getShort("type"),
+                        rs.getShort("status"),
+                        rs.getTimestamp("date") != null ? new Date(rs.getTimestamp("date").getTime()) : null,
+                        rs.getString("entity"),
+                        rs.getString("folio_number"));
+                statementList.add(statement);
+            }
+            return Response.ok(statementList.toArray(new Statement[statementList.size()])).build();
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
+        } finally {
+            dsc.close(conn, st, rs);
+        }
+        //return Response.status(Status.NOT_IMPLEMENTED).entity(new HTTPJsonResponseObject(501, "Not Implemented",
+        //                        "Método no implementado aún")).build();
     }
 
 }

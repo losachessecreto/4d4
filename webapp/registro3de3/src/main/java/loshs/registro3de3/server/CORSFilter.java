@@ -1,6 +1,7 @@
 package loshs.registro3de3.server;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
@@ -8,6 +9,8 @@ import javax.ws.rs.ext.Provider;
 
 @Provider
 public class CORSFilter implements ContainerResponseFilter {
+    
+    static final Logger LOGGER = Logger.getLogger(CORSFilter.class.getName());
 
     @Override
     public void filter(ContainerRequestContext request,
