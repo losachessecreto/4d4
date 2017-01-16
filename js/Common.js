@@ -56,4 +56,15 @@ $(document).ready(function() {
 			}
 		});
 	});
+		
+    $('#enviarMensajeBtn').click(function(e){
+    	$('#mensajesModal').modal();
+    });          		
+        
+	$('[name="subMenu"]').click(function(e){
+			
+		$(this).siblings(0).toggle();
+		e.preventDefault();
+		return false;
+	});	
 });

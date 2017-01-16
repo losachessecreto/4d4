@@ -11,6 +11,8 @@
       <script src="../js/jquery-3.1.1.min.js"></script>	
       <script src="../js/bootstrap.min.js"></script>	      
       <script src="../js/datatables.min.js"></script>	    
+        
+      <script src="../js/Common.js"></script>	    
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
       
@@ -58,11 +60,25 @@
       </div>
       <div class="row">
          <div class="col-md-12"><img class="logo-3d3 center-block" alt="logo 3 de 3" src="../img/logo-3d3.png"/></div>
+         
       </div>      
       <nav class="navbar navbar-default navbar-fixed-top">
          <div class="row-fluid logonav container">
             <div class="navbar-header">
                <a class="navbar-brand" href="#"><img alt="Brand" id="sep-logo" src="../img/contraloria-logo-negro.png" /></a>
+               &nbsp;&nbsp;
+                     <div class="btn-group pull-right" role="group" id="usuarioSelector">
+                        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;<span id="selectedAdmin">Ver como</span>&nbsp;&nbsp;<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="adminsSection">
+                           <li data-role-id="1"><a href="#">Administrador Principal</a></li>
+                           <li data-role-id="2"><a href="#">Administrador Secundario</a></li>                           
+                           <li data-role-id="3"><a href="#">Administrador Tercero</a></li>                           
+                           <li data-role-id="4"><a href="#">Administrador Cuarto</a></li>
+                        </ul>
+                     </div>
+                  
             </div>
             <div id="navbar" class="navbar-collapse collapse ">               
                <ul class="nav navbar-nav navbar-right pull-right user-area">
@@ -76,12 +92,61 @@
          <div class="row-fluid menunav">
             <div id="navbar2" class="navbar-collapse collapse ">
                <ul class="nav navbar-nav">
-                  <li class="nav-active"><a href="#">Declaraciones</a></li>
-                  <li><a href="#">Usuarios</a></li>
-                  <li><a href="#">Contralores</a></li>
-                  <li><a href="#">Entidades</a></li>
-                  <li><a href="#">Impugnaciones</a></li>
-                  <li><a href="#">Reportes<span class="caret"></span></a></li>
+                  <li data-roles="1,2,3" name="filtrable">
+                  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Declaraciones <span class="caret"></span></a>
+                  	<ul class="dropdown-menu">
+                           <li><a href="#">Catálogo</a></li>
+                           <li data-roles="1" name="filtrable"><a href="#">Cancelaciones</a></li>                           
+                           <li><a href="#" data-roles="1,2,3" name="filtrable">Correcciones</a></li>    
+                    </ul>
+                  </li>
+                  <li data-roles="1,2,3" name="filtrable"><a href="#">Dependencias</a></li>
+                  <li data-roles="1,2,3" name="filtrable"><a href="#">Verificaciones</a></li>
+                  <li data-roles="1,2,3" name="filtrable"><a href="#">Investigaciones</a></li>                
+                  <li data-roles="1,2" name="filtrable">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <span class="caret"></span></a>
+                  		<ul class="dropdown-menu">
+                  		   <li>
+                  		   		<a href="javascript:void(0);" name="subMenu" ><span class="icon-1"></span> Declaración Patrimonial </a>
+                  		   		<ul style="display:none" name="subSubMenu">
+                  		   			<li><a href="#">General</a></li>
+                           			<li><a href="#">Obligados</a></li>                           
+                           			<li><a href="#">Incumplimientos</a></li>                           
+                           			<li><a href="#">Extemporáneas</a></li>                           
+                           			<li><a href="#">Recibidas</a></li>                           
+                           			<li><a href="#">Canceladas</a></li>                           
+                           			<li><a href="#">Corregidos</a></li>                           
+                           			<li><a href="#">Histórico</a></li>
+                  		   		</ul>
+                  		   </li>    
+                  		   <li data-roles="2" name="filtrable">
+                  		   		<a href="javascript:void(0);" name="subMenu" ><span class="icon-2"></span> Declaración Fiscal </a>
+                  		   		<ul style="display:none" name="subSubMenu">
+                  		   			<li><a href="#">General</a></li>
+                           			<li><a href="#">Obligados</a></li>                           
+                           			<li><a href="#">Incumplimientos</a></li>                           
+                           			<li><a href="#">Extemporáneas</a></li>                           
+                           			<li><a href="#">Recibidas</a></li>       
+                  		   		</ul>
+                  		   </li>    
+                  		    <li>
+                  			<a  href="javascript:void(0);"  name="subMenu"><span class="glyphicon glyphicon-user"></span> Usuarios </a>
+                  				<ul style="display:none"  name="subSubMenu">
+                           			<li><a href="#">Todos los obligados</a></li>
+                           			<li><a href="#">Individual</a></li>                           
+                           			<li><a href="#">Cumplimiento de Titulares</a></li>                           
+                           			<li><a href="#" data-roles="1" name="filtrable">Eliminados</a></li>                           
+                           			<li><a href="#" data-roles="1" name="filtrable">Impugnaciones</a></li>                           
+                           			<li><a href="#" data-roles="1" name="filtrable">Defunciones</a></li>   
+                        		</ul>
+                  </li>                       
+                        </ul>
+                  </li>
+                  <li>
+                  		<a class="nav-active" href="#">Usuarios </a>
+                  		
+                  </li> 
+                  <li name="filtrable" data-roles="1"><a href="#">Histórico de movimientos</a></li> 
                </ul>
                <ul class="nav navbar-nav navbar-right pull-right hidden-sm hidden-xs user-area">
                   <li>
