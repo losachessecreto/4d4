@@ -37,3 +37,23 @@ var Common = {
     	return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
 };
+$(document).ready(function() {
+
+	$('#adminsSection li').click(function() {
+		var selection = $(this).children('a').text();
+		$('#selectedAdmin').text(selection);
+		
+		var selectedRoleId = $(this).data('role-id');
+		
+		$.each($('[name="filtrable"]'), function(index, element) {
+			var elementRolesId = $(element).data('roles') + '';
+			console.log('elementRolesId: "' + elementRolesId + '", selectedRoleId: ' +selectedRoleId);
+			if(elementRolesId.indexOf(selectedRoleId) < 0) {
+				$(element).hide();
+			}
+			else {
+				$(element).show();
+			}
+		});
+	});
+});
