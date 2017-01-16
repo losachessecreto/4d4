@@ -1,6 +1,13 @@
 package loshs.registro3de3.server.resources;
 
 import java.net.URI;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +17,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,7 +32,7 @@ public class LoginResource {
 
     @Context
     DatasourceContainer dsc;
-    
+
     @Context
     PasswordHasher psh;
 
@@ -51,6 +59,27 @@ public class LoginResource {
     }
 
     public boolean authenticate(String username, char[] password) {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = dsc.getDatasource().getConnection();
+            st = conn.prepareStatement("SELECT password FROM users WHERE \"user\" = ?");
+            st.setString(1, username);
+            rs = st.executeQuery();
+            if (rs.next()) {
+                String hashedPass =  rs.getString("password");
+                psh.compare(password, hashedPass);
+            } else {
+                return false;
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | SQLException ex) {
+            LOGGER.log(Level.SEVERE, null, ex);
+            throw new WebApplicationException(Response.status(Status.INTERNAL_SERVER_ERROR).entity(ex).build());
+        } finally {
+            dsc.close(conn, st, rs);
+        }
+
         return username.equals(new String(password));
     }
 
@@ -62,5 +91,4 @@ public class LoginResource {
         return Response.ok(psh.getSecureHash(pass.toCharArray())).build();
     }
 
-   
 }

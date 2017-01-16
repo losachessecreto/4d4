@@ -57,5 +57,19 @@ public class DatasourceContainer {
             LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
+    
+    public java.util.Date convertDate(java.sql.Date date) {
+        if (date == null){
+            return null;
+        }
+        return new java.util.Date(date.getTime());
+    } 
+    
+    public java.sql.Date convertDate(java.util.Date date) {
+        if (date == null){
+            return null;
+        }
+        return new java.sql.Date(date.getTime());
+    } 
 
-}
+} 

@@ -46,7 +46,8 @@ public class PasswordHasher {
         return Base64.encodeBase64String(salt) + "$" + hash(password, salt);
     }
 
-    public boolean compare(char[] password, String stored) throws Exception {
+    public boolean compare(char[] password, String stored) 
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
         String[] saltAndPass = stored.split("\\$");
         if (saltAndPass.length != 2) {
             throw new IllegalStateException("The stored password does not have the form 'salt$hash'");

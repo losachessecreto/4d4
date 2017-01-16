@@ -59,7 +59,7 @@ public class StatementsResource {
                         rs.getString("user_position"),
                         rs.getShort("type"),
                         rs.getShort("status"),
-                        rs.getTimestamp("date") != null ? new Date(rs.getTimestamp("date").getTime()) : null,
+                        dsc.convertDate(rs.getTimestamp("date")),
                         rs.getString("entity"),
                         rs.getString("folio_number"));
                 statementList.add(statement);
@@ -99,7 +99,7 @@ public class StatementsResource {
                         rs.getString("user_position"),
                         rs.getShort("type"),
                         rs.getShort("status"),
-                        rs.getTimestamp("date") != null ? new Date(rs.getTimestamp("date").getTime()) : null,
+                        dsc.convertDate(rs.getTimestamp("date")),
                         rs.getString("entity"),
                         rs.getString("folio_number"));
             } else {
@@ -233,7 +233,7 @@ public class StatementsResource {
                         rs.getString("user_position"),
                         rs.getShort("type"),
                         rs.getShort("status"),
-                        rs.getTimestamp("date") != null ? new Date(rs.getTimestamp("date").getTime()) : null,
+                        dsc.convertDate(rs.getTimestamp("date")),
                         rs.getString("entity"),
                         rs.getString("folio_number"));
                 statementList.add(statement);

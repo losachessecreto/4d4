@@ -61,10 +61,10 @@ public class UsersResource {
                         rs.getString("city"),
                         rs.getString("entity"),
                         rs.getString("position"),
-                        rs.getTimestamp("register_date") != null ? new Date(rs.getTimestamp("register_date").getTime()) : null,
-                        rs.getTimestamp("last_modification_date") != null ? new Date(rs.getTimestamp("last_modification_date").getTime()) : null,
+                        dsc.convertDate(rs.getTimestamp("register_date")),
+                        dsc.convertDate(rs.getTimestamp("last_modification_date")),
                         rs.getInt("last_user_modified"),
-                        rs.getTimestamp("last_access_date") != null ? new Date(rs.getTimestamp("last_access_date").getTime()) : null,
+                        dsc.convertDate(rs.getTimestamp("last_access_date")),
                         rs.getString("last_ip"));
                 userList.add(user);
             }
@@ -116,10 +116,10 @@ public class UsersResource {
                         rs.getString("city"),
                         rs.getString("entity"),
                         rs.getString("position"),
-                        rs.getTimestamp("register_date") != null ? new Date(rs.getTimestamp("register_date").getTime()) : null,
-                        rs.getTimestamp("last_modification_date") != null ? new Date(rs.getTimestamp("last_modification_date").getTime()) : null,
+                        dsc.convertDate(rs.getTimestamp("register_date")),
+                        dsc.convertDate(rs.getTimestamp("last_modification_date")),
                         rs.getInt("last_user_modified"),
-                        rs.getTimestamp("last_access_date") != null ? new Date(rs.getTimestamp("last_access_date").getTime()) : null,
+                        dsc.convertDate(rs.getTimestamp("last_access_date")),
                         rs.getString("last_ip"));
             } else {
                 return Response.status(Status.NOT_FOUND)

@@ -1,5 +1,5 @@
 var Common = {
-	apiUrl:'http://192.168.1.66:8080/registro3de3/webapi',    
+	apiUrl:'http://localhost:8080/registro3de3/webapi',    
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
 		
 		var url =Common.apiUrl + '/' + moduleUrl;
@@ -37,3 +37,23 @@ var Common = {
     	return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
 };
+$(document).ready(function() {
+
+	$('#adminsSection li').click(function() {
+		var selection = $(this).children('a').text();
+		$('#selectedAdmin').text(selection);
+		
+		var selectedRoleId = $(this).data('role-id');
+		
+		$.each($('[name="filtrable"]'), function(index, element) {
+			var elementRolesId = $(element).data('roles') + '';
+			console.log('elementRolesId: "' + elementRolesId + '", selectedRoleId: ' +selectedRoleId);
+			if(elementRolesId.indexOf(selectedRoleId) < 0) {
+				$(element).hide();
+			}
+			else {
+				$(element).show();
+			}
+		});
+	});
+});

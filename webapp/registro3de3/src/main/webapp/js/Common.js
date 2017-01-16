@@ -1,5 +1,5 @@
 var Common = {
-	apiUrl:'http://192.168.1.66:8080/registro3de3/webapi',    
+	apiUrl:'http://localhost:8080/registro3de3/webapi',    
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
 		
 		var url =Common.apiUrl + '/' + moduleUrl;
