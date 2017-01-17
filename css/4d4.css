@@ -31,7 +31,7 @@ body.not-login{
   padding-top: 110px;
 }
 body.body-login{
-	padding-top: 52px;
+	padding-top: 75px;
 }
 @font-face {
   font-family: 'icomoon';
@@ -96,29 +96,25 @@ body.body-login{
   content: "\e90b";
 }
 /*=== 2. Anchor Link ===*/
-.navbar{
-
-	background: #D8D8D8;
-}
 .navbar-default .navbar-nav > li > a {
-	color:#fff;
+	color: #239485;
 }
 
 .navbar-default div.logonav .navbar-nav > li > a {
-	color:#183455;
+	color:#fff;
 }
-.navbar-brand{	
+.navbar-brand {	
 	padding-top: 5px;	
-	padding-bottom: 5px;	
-	border-left: 5px solid #979797;
-	
-	border-right: 5px solid #979797;
+	padding-bottom: 5px;
+}
+#jalisco-logo{
+	height: 40px;
 }
 .navbar-brand > img{
 	height: 100%;
 }
 .main-container{
-	background-color: #183455;
+	background-color: #4B5057;
 	margin-top: 50px;
 	padding-top:15px;
 }
@@ -126,34 +122,32 @@ body.body-login{
 	width: 50%;
 }
 .nav-tabs> li.active > a.tab-declaracion-requerida, .tab-declaracion-requerida {
-	background-color: #428BCA;
+	background-color: #239485;
 	color: #fff;
 }
 .nav-tabs> li.active > a.tab-declaracion-preventiva, .tab-declaracion-preventiva {
-	background-color: #85B1D2;
+	background-color: #78B4AC;
 	color: #fff;
 }
-.logonav{
-	background: #D8D8D8;
+.gris-oscuro-background {
+	background: #4B5057;
 }
-
+.user-area{
+	color: #fff;
+}
 .logonav > a{
 	color: #000;
 }
 .menunav{
-	background-color: #183455;
+	background-color: #ededed;	
 }
 .login-container{
  
-  background: rgba(112,178,224,1);  /*For brow-fluidsers that do not support gradients*/ 
-  background: -webkit-linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /*Safari 5.1-6*/
-  background: -o-linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /*Opera 11.1-12*/
-  background: -moz-linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /*Fx 3.6-15*/
-  background: linear-gradient(rgba(112,178,224,1), rgba(77,123, 155, 1)); /*Standard*/
+  background: #ededed;  /*For brow-fluidsers that do not support gradients*/ 
 }
 .login-container-obligado{
 
-  background-image: url("../img/mesatrabajo.png"), linear-gradient(rgba(112,178,224,1),rgba(77,123,155,1)); /* W3C */
+  background-image: url("../img/mesatrabajo.png"), linear-gradient(#ededed, #ededed); /* W3C */
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 0px 30px;
@@ -173,11 +167,8 @@ body.body-login{
 	width: 40%;
 	margin-top: 5%;
 	padding: 2%;
-	background: #85B1D2;
+	background: rgba(227,227,227,1);
 	color: #183455;
-}
-.login-pwd-leyenda{
-	color: #fff;
 }
 .footer{
 	bottom: 0;
@@ -189,7 +180,7 @@ body.body-login{
 .footer-background{
 	
 	box-shadow: 0 4px 33px 0 rgba(0,0,0,0.50);
-	background: #92C3D8;
+	background: rgba(75,80,86,1);
 }
 .onda-footer{
 	width: 100%;
@@ -207,7 +198,7 @@ body.body-login{
 	height: 80px;
 }
 .usuario-panel-data{
-	background:#D3DEE7;
+	background:#fff;
 	padding-top: 10px;
 }
 .usuario-panel-fechas{
@@ -246,7 +237,7 @@ body.body-login{
 	width: 80%;
 }
 .navbar-default .navbar-nav>li>a:hover{
-	color: #fff;
+	color: #000;
 	text-decoration: underline;
 }
 
@@ -256,13 +247,12 @@ body.body-login{
 #navbar2 > ul > li:nth-child(5),
 #navbar2 > ul > li:nth-child(6),
 #navbar2 > ul > li:nth-child(7){
-	border-left: 4px solid #fff;
+	border-left: 1px solid #4B5057;
 }
 #tableUsuarios_wrapper{
 	padding-top: 30px;
 }
-.usuario-panel-data-admin{
-	background-color: #183455;	
+.usuario-panel-data-admin{	
 	color: #fff;
 }
 .usuario-foto-perfil-admin{
@@ -308,4 +298,22 @@ body.body-login{
 }
 #usuarioSelector {
 	padding-top: 5px;
+}
+#usuariosModal > div > div >div.modal-body {
+	height: 400px;
+	overflow-y: scroll;
+}
+.verde-pino-background {
+	background: #239485;
+	color: #fff;
+}
+.verde-pino-claro-background {
+	background: #239485;
+	color: #fff;
+}
+.verde-pino-letra {
+	color: #239485;
+}
+div.panel-acciones > div.panel{
+	border: 1px solid #239485;
 }

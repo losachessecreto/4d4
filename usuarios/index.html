@@ -18,7 +18,11 @@
       <script type="text/javascript">
          $(document).ready(function() {
          
-         	Contralor.getUsuarios();        				
+         	Contralor.getUsuarios();
+         	
+         	$('#agregarUsuario').click(function() {
+         		$('#usuariosModal').modal();
+         	});        				
          });
       </script>
    </head>
@@ -26,8 +30,8 @@
       <div class="row-fluid">
          <div class="col-md-12">
             <div class="btn-group pull-right" role="group" id="enviarMensajeBtnGroup">
-               <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="enviarMensajeBtn" >
-               <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar Mensaje&nbsp;&nbsp;<span class="caret"></span>
+               <a href="#" class="btn verde-pino-background dropdown-toggle" data-toggle="dropdown" id="enviarMensajeBtn" >
+               <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar nuevo aviso&nbsp;&nbsp;<span class="caret"></span>
                </a>
                <ul class="dropdown-menu">
                   <li><a href="#">A toda la comunidad</a></li>
@@ -46,33 +50,35 @@
       <div class="row">
          <div class="col-md-12"><img class="logo-3d3 center-block" alt="logo 3 de 3" src="../img/logo-3d3.png"/></div>
       </div>
-      <nav class="navbar navbar-default navbar-fixed-top">
+      <nav class="navbar navbar-default navbar-fixed-top gris-oscuro-background">
          <div class="row-fluid logonav container">
             <div class="navbar-header">
-               <a class="navbar-brand" href="#"><img alt="Brand" id="sep-logo" src="../img/contraloria-logo-negro.png" /></a>
-                	&nbsp;&nbsp;
-                     <div class="btn-group pull-right" role="group" id="usuarioSelector">
-                        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
-                        <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;<span id="selectedAdmin">Ver como</span>&nbsp;&nbsp;<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" id="adminsSection">
-                           <li data-role-id="1"><a href="#">Administrador Principal</a></li>
-                           <li data-role-id="2"><a href="#">Administrador Secundario</a></li>                           
-                           <li data-role-id="3"><a href="#">Administrador Tercero</a></li>                           
-                           <li data-role-id="4"><a href="#">Administrador Cuarto</a></li>
-                        </ul>
-                     </div>
-                  
+               <a class="navbar-brand" href="#"><img alt="Brand" id="sep-logo" src="../img/contraloria-logo.png" /></a>
+               &nbsp;&nbsp;
+               <div class="btn-group pull-right" role="group" id="usuarioSelector">
+                  <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
+                  <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;<span id="selectedAdmin">Ver como</span>&nbsp;&nbsp;<span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" id="adminsSection">
+                     <li data-role-id="1"><a href="#">Administrador Principal</a></li>
+                     <li data-role-id="2"><a href="#">Administrador Secundario</a></li>
+                     <li data-role-id="3"><a href="#">Administrador Tercero</a></li>
+                     <li data-role-id="4"><a href="#">Administrador Cuarto</a></li>
+                  </ul>
+               </div>
             </div>
             <div id="navbar" class="navbar-collapse collapse ">
-               <ul class="nav navbar-nav navbar-right pull-right user-area">                 
+               <ul class="nav navbar-nav navbar-right pull-right user-area">
                   <li>
-                  	 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hector P. <span class="caret"></span></a>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hector P. <span class="caret"></span></a>
                      <ul class="dropdown-menu">
-                           <li><a href="#">Cambiar contraseña</a></li>    
-                    </ul>
+                        <li><a href="#">Cambiar contraseña</a></li>
+                     </ul>
                   </li>
                   
+                  <li>
+		          	<img alt="Brand" class="navbar-brand"src="../img/jalisco.gob.png" />
+                  </li>
                </ul>
             </div>
             <!--/.nav-collapse -->
@@ -81,62 +87,61 @@
             <div id="navbar2" class="navbar-collapse collapse ">
                <ul class="nav navbar-nav">
                   <li data-roles="1,2,3" name="filtrable">
-                  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Declaraciones <span class="caret"></span></a>
-                  	<ul class="dropdown-menu">
-                           <li><a href="#">Catálogo</a></li>
-                           <li data-roles="1" name="filtrable"><a href="#">Cancelaciones</a></li>                           
-                           <li><a href="#" data-roles="1,2,3" name="filtrable">Correcciones</a></li>    
-                    </ul>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Declaraciones <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="#">Catálogo</a></li>
+                        <li data-roles="1" name="filtrable"><a href="#">Cancelaciones</a></li>
+                        <li><a href="#" data-roles="1,2,3" name="filtrable">Correcciones</a></li>
+                     </ul>
                   </li>
                   <li data-roles="1,2,3" name="filtrable"><a href="#">Dependencias</a></li>
                   <li data-roles="1,2,3" name="filtrable"><a href="#">Verificaciones</a></li>
-                  <li data-roles="1,2,3" name="filtrable"><a href="#">Investigaciones</a></li>                
+                  <li data-roles="1,2,3" name="filtrable"><a href="#">Investigaciones</a></li>
                   <li data-roles="1,2" name="filtrable">
-                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <span class="caret"></span></a>
-                  		<ul class="dropdown-menu">
-                  		   <li>
-                  		   		<a href="javascript:void(0);" name="subMenu" ><span class="icon-1"></span> Declaración Patrimonial </a>
-                  		   		<ul style="display:none" name="subSubMenu">
-                  		   			<li><a href="#">General</a></li>
-                           			<li><a href="#">Obligados</a></li>                           
-                           			<li><a href="#">Incumplimientos</a></li>                           
-                           			<li><a href="#">Extemporáneas</a></li>                           
-                           			<li><a href="#">Recibidas</a></li>                           
-                           			<li><a href="#">Canceladas</a></li>                           
-                           			<li><a href="#">Corregidos</a></li>                           
-                           			<li><a href="#">Histórico</a></li>
-                  		   		</ul>
-                  		   </li>    
-                  		   <li data-roles="2" name="filtrable">
-                  		   		<a href="javascript:void(0);" name="subMenu" ><span class="icon-2"></span> Declaración Fiscal </a>
-                  		   		<ul style="display:none" name="subSubMenu">
-                  		   			<li><a href="#">General</a></li>
-                           			<li><a href="#">Obligados</a></li>                           
-                           			<li><a href="#">Incumplimientos</a></li>                           
-                           			<li><a href="#">Extemporáneas</a></li>                           
-                           			<li><a href="#">Recibidas</a></li>       
-                  		   		</ul>
-                  		   </li>    
-                  		    <li>
-                  			<a  href="javascript:void(0);"  name="subMenu"><span class="glyphicon glyphicon-user"></span> Usuarios </a>
-                  				<ul style="display:none"  name="subSubMenu">
-                           			<li><a href="#">Todos los obligados</a></li>
-                           			<li><a href="#">Individual</a></li>                           
-                           			<li><a href="#">Cumplimiento de Titulares</a></li>                           
-                           			<li><a href="#" data-roles="1" name="filtrable">Eliminados</a></li>                           
-                           			<li><a href="#" data-roles="1" name="filtrable">Impugnaciones</a></li>                           
-                           			<li><a href="#" data-roles="1" name="filtrable">Defunciones</a></li>   
-                        		</ul>
-                  </li>                       
-                        </ul>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                        <li>
+                           <a href="javascript:void(0);" name="subMenu" ><span class="icon-1"></span> Declaración Patrimonial </a>
+                           <ul style="display:none" name="subSubMenu">
+                              <li><a href="#">General</a></li>
+                              <li><a href="#">Obligados</a></li>
+                              <li><a href="#">Incumplimientos</a></li>
+                              <li><a href="#">Extemporáneas</a></li>
+                              <li><a href="#">Recibidas</a></li>
+                              <li><a href="#">Canceladas</a></li>
+                              <li><a href="#">Corregidos</a></li>
+                              <li><a href="#">Histórico</a></li>
+                           </ul>
+                        </li>
+                        <li data-roles="2" name="filtrable">
+                           <a href="javascript:void(0);" name="subMenu" ><span class="icon-2"></span> Declaración Fiscal </a>
+                           <ul style="display:none" name="subSubMenu">
+                              <li><a href="#">General</a></li>
+                              <li><a href="#">Obligados</a></li>
+                              <li><a href="#">Incumplimientos</a></li>
+                              <li><a href="#">Extemporáneas</a></li>
+                              <li><a href="#">Recibidas</a></li>
+                           </ul>
+                        </li>
+                        <li>
+                           <a  href="javascript:void(0);"  name="subMenu"><span class="glyphicon glyphicon-user"></span> Usuarios </a>
+                           <ul style="display:none"  name="subSubMenu">
+                              <li><a href="#">Todos los obligados</a></li>
+                              <li><a href="#">Individual</a></li>
+                              <li><a href="#">Cumplimiento de Titulares</a></li>
+                              <li><a href="#" data-roles="1" name="filtrable">Eliminados</a></li>
+                              <li><a href="#" data-roles="1" name="filtrable">Impugnaciones</a></li>
+                              <li><a href="#" data-roles="1" name="filtrable">Defunciones</a></li>
+                           </ul>
+                        </li>
+                     </ul>
                   </li>
                   <li>
-                  		<a class="nav-active" href="#">Usuarios </a>
-                  		
-                  </li> 
-                  <li name="filtrable" data-roles="1"><a href="#">Histórico de movimientos</a></li> 
+                     <a class="nav-active" href="#">Usuarios </a>
+                  </li>
+                  <li name="filtrable" data-roles="1"><a href="#">Histórico de movimientos</a></li>
                </ul>
-               <ul class="nav navbar-nav navbar-right pull-right user-area">               
+               <ul class="nav navbar-nav navbar-right pull-right user-area">
                   <li>
                      <a href="/logoutUser">Cerrar Sesión&nbsp;&nbsp;&nbsp;</a>
                   </li>
@@ -148,41 +153,40 @@
       <div class="container main-container">
          <div class="row">
             <div class="col-md-12">
-               <div class="panel panel-info">
-                  <div class="panel-heading">
-                     <h3 class="panel-title" >Lista de Usuarios</h3>
+               <div class="panel ">
+                  <div class="panel-heading verde-pino-background">
+                     <h3 class="panel-title " >Lista de Usuarios</h3>
                   </div>
                   <div class="panel-body">
                      <div class="row">
                         <div class="col-sm-10">
-                        	<div class="pull-right">
-                        		<div class="btn-group " role="group">
-                              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              	
-                              	Estatus
-                              <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu">
-                                 <li><a href="#">Activo</a></li>
-                                 <li><a href="#">Ináctivo</a></li>
-                              </ul>
+                           <div class="pull-right">
+                              <div class="btn-group " role="group">
+                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Estatus
+                                 <span class="caret"></span>
+                                 </button>
+                                 <ul class="dropdown-menu">
+                                    <li><a href="#">Activo</a></li>
+                                    <li><a href="#">Ináctivo</a></li>
+                                 </ul>
+                              </div>
+                              <div class="btn-group " role="group">
+                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <span class="glyphicon glyphicon-download-alt"></span>
+                                 Exportar
+                                 <span class="caret"></span>
+                                 </button>
+                                 <ul class="dropdown-menu">
+                                    <li><a href="#">Word</a></li>
+                                    <li><a href="#">Excel</a></li>
+                                    <li><a href="#">PDF</a></li>
+                                 </ul>
+                              </div>
                            </div>
-                        		<div class="btn-group " role="group">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <span class="glyphicon glyphicon-download-alt"></span>
-                              Exportar
-                              <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu">
-                                 <li><a href="#">Word</a></li>
-                                 <li><a href="#">Excel</a></li>
-                                 <li><a href="#">PDF</a></li>
-                              </ul>
-                           </div>
-                            </div>
                         </div>
                         <div class="col-sm-2">
-                           <a href="#" class="btn btn-danger pull-right">Agregar Obligado <span class="glyphicon glyphicon-plus"></span></a>
+                           <a href="#" class="btn btn-danger pull-right" id="agregarUsuario">Agregar Obligado <span class="glyphicon glyphicon-plus"></span></a>
                         </div>
                      </div>
                      <div class="row-fluid"><br /></div>
@@ -462,7 +466,7 @@
             </div>
          </div>
       </div>
-      <div class="modal fade" id="mensajesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal fade" id="mensajesModal" tabindex="-1" role="dialog" >
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -470,10 +474,76 @@
                   <h4 class="modal-title" id="myModalLabel">Nuevo Aviso</h4>
                </div>
                <div class="modal-body">
-                  ...
+                  <p>1</p>
+                  <p>1</p>
+                  <p>1</p>
+                  <p>1</p>
+                  <p>1</p>
+                  <p>1</p>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar&nbsp;&nbsp;</span></button>
+                  <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar&nbsp;&nbsp;</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="modal fade" id="usuariosModal" tabindex="-1" role="dialog">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Nuevo Usuario</h4>
+               </div>
+               
+               
+               <div class="modal-body row-fluid">               	 
+               	<div class="form-group ">
+  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Nombre:</label></div>
+  					<div class="col-md-12"><input type="text" class="form-control" id="" aria-describedby="helpBlock2" placeholder="Nombre"></div>
+				</div>
+				
+                  <div class="col-md-12">&nbsp;</div>
+				<div class="form-group ">
+				
+  					<div class="col-md-12"><label class="control-label" for="apellidos">Apellidos:</label></div>
+  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Paterno"></div>
+  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Materno"></div>  					
+				</div>
+				
+                <div class="col-md-12">&nbsp;</div>
+				<div class="form-group ">
+  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Ciudad:</label></div>
+  					<div class="col-md-12">
+  						<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCiudad" data-toggle="dropdown" aria-haspopup="true" >
+                     	Selecciona tu ciudad
+                     <span class="caret"></span>
+                     </button>
+                     <ul class="dropdown-menu" >
+                        <li><a href="#">Guadalajara</a></li>
+                        <li><a href="#">Zapopan</a></li>
+                        <li><a href="#">Tlaquepaque</a></li>
+                        <li><a href="#">Ocotlán</a></li>
+                     </ul>
+  					</div>
+				</div>	
+				
+                <div class="col-md-12">&nbsp;</div>
+				<div class="form-group ">
+  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">RFC:</label></div>
+  					<div class="col-md-12"><input type="text" class="form-control" id="" aria-describedby="helpBlock2" placeholder="RFC"></div>
+				</div>
+				<div class="col-md-12">&nbsp;</div>
+				<div class="form-group ">
+  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">CURP:</label></div>
+  					<div class="col-md-12"><input type="text" class="form-control" id="" aria-describedby="helpBlock2" placeholder="CURP"></div>
+				</div>
+				<div class="col-md-12">&nbsp;</div>
+				
+               
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
+                  <button type="button" class="btn btn-primary">Agregar</button>
                </div>
             </div>
          </div>
@@ -489,6 +559,5 @@
             </div>
          </div>
       </footer>
-	  </form>
    </body>
 </html>
