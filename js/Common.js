@@ -71,4 +71,9 @@ $(document).ready(function() {
 		$('form').attr('action', Common.apiUrl + '/test/file/download');
 		$('form').submit();
 	});
+	
+	$('[name="downloadFileProd"]').click(function() {
+		$('form').attr('action', Common.apiUrl + '/test/file/download');
+		$('form').submit();
+	});
 });
