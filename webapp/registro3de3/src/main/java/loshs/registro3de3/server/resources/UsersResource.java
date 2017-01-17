@@ -45,7 +45,7 @@ public class UsersResource {
         ResultSet rs = null;
         try {
             LinkedList<User> userList = new LinkedList();
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.createStatement();
             rs = st.executeQuery("SELECT * FROM users WHERE status = 0 ORDER BY id");
             while (rs.next()) {
@@ -98,7 +98,7 @@ public class UsersResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("SELECT * FROM users WHERE id = ? AND status = 0");
             st.setLong(1, userId);
             rs = st.executeQuery();
@@ -145,7 +145,7 @@ public class UsersResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("INSERT INTO users("
                     + "rfc, \"user\", password, mail, father_lastname, mother_lastname, given_name,"
                     + "city, entity, position, register_date, last_modification_date, last_user_modified, "
@@ -224,7 +224,7 @@ public class UsersResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("UPDATE users SET status = status * -1 - 1 WHERE id = ?");
             st.setLong(1, userId);
 
@@ -252,7 +252,7 @@ public class UsersResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("UPDATE users SET status = -1 WHERE id = ?");
             st.setLong(1, userId);
 

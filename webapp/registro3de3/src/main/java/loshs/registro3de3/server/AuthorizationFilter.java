@@ -23,7 +23,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
 
         String path = requestContext.getUriInfo().getPath();
-        if (path != null && !path.contains("login")) {
+        if (path != null && !path.contains("login") && !path.contains("test")) {
             HttpSession session = request.getSession(false);
             if (session == null) {
                 requestContext.abortWith(Response

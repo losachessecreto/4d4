@@ -43,7 +43,7 @@ public class StatementsResource {
         ResultSet rs = null;
         try {
             LinkedList<Statement> statementList = new LinkedList();
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.createStatement();
             rs = st.executeQuery("SELECT s.id, s.user, u.user as user_name, "
                     + "u.position as user_position, s.type, s.status, s.date, "
@@ -82,7 +82,7 @@ public class StatementsResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("SELECT s.id, s.user, u.user as user_name, "
                     + "u.position as user_position, s.type, s.status, s.date, "
                     + "u.entity, s.folio_number "
@@ -123,7 +123,7 @@ public class StatementsResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("INSERT INTO statements("
                     + "status, folio_number, \"user\", type, date) "
                     + "VALUES (?, ?, ?, ?, ?) RETURNING id");
@@ -160,7 +160,7 @@ public class StatementsResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("UPDATE statements SET status = status * -1 WHERE id = ?");
             st.setLong(1, statementId);
 
@@ -188,7 +188,7 @@ public class StatementsResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("UPDATE statements SET status = -1 WHERE id = ?");
             st.setLong(1, statementId);
 
@@ -217,7 +217,7 @@ public class StatementsResource {
         ResultSet rs = null;
         try {
             LinkedList<Statement> statementList = new LinkedList();
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("SELECT s.id, s.user, u.user as user_name, "
                     + "u.position as user_position, s.type, s.status, s.date, "
                     + "u.entity, s.folio_number "

@@ -63,7 +63,7 @@ public class LoginResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
-            conn = dsc.getDatasource().getConnection();
+            conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("SELECT password FROM users WHERE \"user\" = ?");
             st.setString(1, username);
             rs = st.executeQuery();
