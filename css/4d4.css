@@ -339,3 +339,5 @@ div.panel-acciones > div.panel{
 .reportes-filters > div.col-md-4 {
 	height: 250px;
 }
+table.dataTable tr.odd { background-color: #EFEFEF; }
+table.dataTable tr.even { background-color: white; }
