@@ -1,5 +1,5 @@
 var Common = {
-	apiUrl:'http://192.168.15.18:8080/registro3de3/webapi',    
+	apiUrl:'http://192.168.15.66:8080/registro3de3/webapi',    
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
 		
 		var url =Common.apiUrl + '/' + moduleUrl;
@@ -8,6 +8,7 @@ var Common = {
             method: method,
 			url: url,
             data: data,
+            timeout: 1000,
             error: function (data) {
 	            
 	            console.log('error');

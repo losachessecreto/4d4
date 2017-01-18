@@ -26,7 +26,10 @@
          		minViewMode: 'years'
          	});
          	
-         	$('#tableUsuarios').dataTable(); 
+         	$('#tableUsuarios').dataTable({
+         		'scrollCollapse' : true,
+            	'scrollY': "300px"
+         	}); 
          	
          	
          });
