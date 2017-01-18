@@ -1,5 +1,5 @@
 var Common = {
-	apiUrl:'http://localhost:8080/registro3de3/webapi',    
+	apiUrl:'http://192.168.15.18:8080/registro3de3/webapi',    
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
 		
 		var url =Common.apiUrl + '/' + moduleUrl;
@@ -55,5 +55,25 @@ $(document).ready(function() {
 				$(element).show();
 			}
 		});
+	});
+		
+    $('#enviarMensajeBtnGroup ul li').click(function(e){
+    	$('#mensajesModal').modal();
+    });          		
+        
+	$('[name="subMenu"]').click(function(e){
+			
+		$(this).siblings(0).toggle();
+		e.preventDefault();
+		return false;
+	});	
+	$('[name="downloadFile"]').click(function() {
+		$('form').attr('action', Common.apiUrl + '/test/file/download');
+		$('form').submit();
+	});
+	
+	$('[name="downloadFileProd"]').click(function() {
+		$('form').attr('action', Common.apiUrl + '/file/download');
+		$('form').submit();
 	});
 });

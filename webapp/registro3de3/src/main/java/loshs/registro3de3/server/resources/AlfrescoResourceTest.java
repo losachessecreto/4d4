@@ -44,15 +44,15 @@ public class AlfrescoResourceTest {
         properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:folder");
         properties.put(PropertyIds.NAME, "Registro 3 de 3");
 
-        Folder newFolder = root.createFolder(properties);
+        //Folder newFolder = root.createFolder(properties);
 
         String name = "kimiresume.pdf";
 
         // properties 
         // (minimal set: name and object type id)
-        Map<String, Object> properties = new HashMap<>();
-        properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
-        properties.put(PropertyIds.NAME, name);
+        Map<String, Object> propertiesff = new HashMap<>();
+        propertiesff.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
+        propertiesff.put(PropertyIds.NAME, name);
 
         // content
         byte[] content = "Kiwi!".getBytes();
@@ -60,7 +60,7 @@ public class AlfrescoResourceTest {
         ContentStream contentStream = new ContentStreamImpl(name, BigInteger.valueOf(content.length), "text/plain", stream);
 
         // create a major version
-        Document newDoc = root.createDocument(properties, contentStream, VersioningState.MAJOR);
+        Document newDoc = root.createDocument(propertiesff, contentStream, VersioningState.MAJOR);
 
         return Response.ok("The id of the new document is " + newDoc.getId()).build();
     }
@@ -94,7 +94,7 @@ public class AlfrescoResourceTest {
 
         Folder root = session.getRootFolder();
 
-        String name = "hugoDocument.txt";
+        String name = "kimiresume.pdf";
 
         if (session.existsPath(root.getPath(), name)) {
             CmisObject o = session.getObjectByPath(root.getPath(), name);

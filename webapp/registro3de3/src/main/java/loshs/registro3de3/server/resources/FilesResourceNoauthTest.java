@@ -66,21 +66,24 @@ public class FilesResourceNoauthTest {
     public Response uploadPdfFile(@FormDataParam("file") InputStream fileInputStream,
             @FormDataParam("file") FormDataContentDisposition fileMetaData) throws Exception {
         String UPLOAD_PATH = "/tmp/";
+        String mediaType = "";
         try {
             int read;
             byte[] bytes = new byte[1024];
             String uploadedName = Normalizer.normalize(fileMetaData.getFileName(), Normalizer.Form.NFD);
             uploadedName = uploadedName.replaceAll("[^\\p{ASCII}]", "");
-            try (OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + uploadedName))) {
+            File tempFile = new File(UPLOAD_PATH + uploadedName);
+            try (OutputStream out = new FileOutputStream(tempFile)) {
                 while ((read = fileInputStream.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
                 out.flush();
             }
+            mediaType = new loshs.registro3de3.server.FileTypeDetector().probeContentType(tempFile.toPath());
         } catch (IOException e) {
             throw new WebApplicationException("Error al cargar el archivo. Por favor intente nuevamente");
         }
-        return Response.ok("Carga completada").build();
+        return Response.ok("The file is " +  mediaType).build();
     }
 
 }
