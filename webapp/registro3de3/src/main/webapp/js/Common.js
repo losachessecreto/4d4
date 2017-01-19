@@ -8,7 +8,7 @@ var Common = {
             method: method,
 			url: url,
             data: url.indexOf('login') >= 0 ? data: JSON.stringify(data),
-            contentType: url.indexOf('login') >= 0 ? 'application/x-www-form-urlencoded; charset=UTF-8': 'application/json charset=utf-8',
+            contentType: url.indexOf('login') >= 0 ? 'application/x-www-form-urlencoded; charset=UTF-8': 'application/json',
             timeout: 1000,
             error: function (data) {
 	            
@@ -63,6 +63,11 @@ $(document).ready(function() {
     	$('#destinatariosMensaje').val(e.target.text);
     	$('#mensajesModal').modal();
     });          		
+      
+    $('div.mail-recipient-container > div > div > a').click(function(ev) { 
+    	$('#destinatarioEspecifico').val(ev.target.text);
+    });
+  
         
 	$('[name="subMenu"]').click(function(e){
 			

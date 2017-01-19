@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
-import java.nio.file.Paths;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +22,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -54,11 +52,54 @@ public class FilesResourceNoauthTest {
 
     private static final String ALFRESCO_3_DE_3_FOLDER = "Registro 3 de 3";
 
+    @GET
+    @Path("download")
+    public Response download() {
+        try {
+            StreamingOutput fileStream = new StreamingOutput() {
+                @Override
+                public void write(java.io.OutputStream output) throws IOException {
+                    try {
+                        InputStream input = new FileInputStream(new File("/home/hugo/Downloads/Herrera_Fiscal.pdf"));
+                        int read;
+                        while ((read = input.read()) != -1) {
+                            output.write(read);
+                        }
+                        output.flush();
+                    }
+                    catch(IllegalArgumentException | NullPointerException ex ){
+                        throw new WebApplicationException(ex);
+                    }
+                }
+            };
+            return Response.ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+                    .header("content-disposition", "attachment; filename = Herrera_Fiscal.pdf").build();
+        } catch (IllegalArgumentException | NullPointerException e) {
+            throw new WebApplicationException(e);
+        }
+    }
+    
+    @GET
+    @Path("download2")
+    public Response download2() {
+        final AlfrescoDocumentObject docu = new AlfrescoDocumentObject(null, "Herrera_Fiscal.pdf");
+        return download(docu);
+    }
+    
+    
+    
     @POST
     @Path("download")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response download(@FormParam("objectId") String objectId, @FormParam("fileName") String fileName) {
-        final AlfrescoDocumentObject docu = new AlfrescoDocumentObject(objectId, fileName);
+        String id;
+        if (!objectId.isEmpty()) {
+            id = objectId;
+        }
+        else {
+            id = null;
+        }
+        final AlfrescoDocumentObject docu = new AlfrescoDocumentObject(id, fileName);
         return download(docu);
     }
     
@@ -72,7 +113,6 @@ public class FilesResourceNoauthTest {
                 @Override
                 public void write(java.io.OutputStream output) throws IOException {
                     try {
-                        System.out.println(docu);
                         Document document = getFromAlfresco(docu.getObjectId(), docu.getFileName());
                         InputStream input = new BufferedInputStream(document.getContentStream().getStream());
                         int read;

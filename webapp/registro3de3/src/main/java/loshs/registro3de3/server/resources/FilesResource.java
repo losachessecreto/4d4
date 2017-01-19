@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
-import java.nio.file.Paths;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,11 +18,9 @@ import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -58,10 +55,16 @@ public class FilesResource {
     @Path("download")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response download(@FormParam("objectId") String objectId, @FormParam("fileName") String fileName) {
-        final AlfrescoDocumentObject docu = new AlfrescoDocumentObject(objectId, fileName);
+        String id;
+        if (!objectId.isEmpty()) {
+            id = objectId;
+        }
+        else {
+            id = null;
+        }
+        final AlfrescoDocumentObject docu = new AlfrescoDocumentObject(id, fileName);
         return download(docu);
     }
-    
     
     @POST
     @Path("download")
@@ -72,7 +75,6 @@ public class FilesResource {
                 @Override
                 public void write(java.io.OutputStream output) throws IOException {
                     try {
-                        System.out.println(docu);
                         Document document = getFromAlfresco(docu.getObjectId(), docu.getFileName());
                         InputStream input = new BufferedInputStream(document.getContentStream().getStream());
                         int read;

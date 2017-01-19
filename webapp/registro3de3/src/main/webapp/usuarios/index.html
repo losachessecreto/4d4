@@ -16,54 +16,52 @@
       <script src="../js/Contralor.js"></script>	          
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-      
-      
       <script type="text/javascript">
-      var viewModel = {
-      	usuario: {
-      		given_name: ko.observable(''), 
-      		     		
-      		father_lastname: ko.observable(''),     		
-      		mother_lastname: ko.observable(''),
-      		rfc: ko.observable(''),
-      		mail: ko.observable(''),
-      		curp: ko.observable(''),
-      		city: ko.observable(''),
-      		mail: ko.observable('prueba@prueba'),
-      		user: ko.observable(''),
-      		password: ko.observable(''),
-      		entity: ko.observable('Contraloría del estado de pruebas'),
-      		position: 'Usuario de Prueba'
-      	}
-      };
-      
-      $(document).ready(function() {
-      		ko.applyBindings(viewModel);
-          	          	          	
-         	Contralor.getUsuarios();
-         	
-         	$('#agregarUsuario').click(function() {
-         		$('#usuariosModal').modal();
-         	});       
-          	
-          	$('#agregarUsuario').click(function() {
-         		$('#usuariosModal').modal();
-         	});       
-          	
-          	$('#submitUsuario').click(function() {
-          		viewModel.usuario.password(viewModel.usuario.user());
-          		Contralor.agregarUsuario(viewModel.usuario);
-         		$('#usuariosModal').modal('hide');
-         	});       
-          	
-          	$('#ciudades > li > a').click(function(ev) {
-          		
-          		$('#ciudadSpan').text(ev.target.text);
-          		viewModel.usuario.city(ev.target.text);
-          	});
-
-       });
-   </script>
+         var viewModel = {
+         	usuario: {
+         		given_name: ko.observable(''), 
+         		     		
+         		father_lastname: ko.observable(''),     		
+         		mother_lastname: ko.observable(''),
+         		rfc: ko.observable(''),
+         		mail: ko.observable(''),
+         		curp: ko.observable(''),
+         		city: ko.observable(''),
+         		mail: ko.observable('prueba@prueba'),
+         		user: ko.observable(''),
+         		password: ko.observable(''),
+         		entity: ko.observable('Contraloría del estado de pruebas'),
+         		position: 'Usuario de Prueba'
+         	}
+         };
+         
+         $(document).ready(function() {
+         		ko.applyBindings(viewModel);
+             	          	          	
+            	Contralor.getUsuarios();
+            	
+            	$('#agregarUsuario').click(function() {
+            		$('#usuariosModal').modal();
+            	});       
+             	
+             	$('#agregarUsuario').click(function() {
+            		$('#usuariosModal').modal();
+            	});       
+             	
+             	$('#submitUsuario').click(function() {
+             		viewModel.usuario.password(viewModel.usuario.user());
+             		Contralor.agregarUsuario(viewModel.usuario);
+            		$('#usuariosModal').modal('hide');
+            	});       
+             	
+             	$('#ciudades > li > a').click(function(ev) {
+             		
+             		$('#ciudadSpan').text(ev.target.text);
+             		viewModel.usuario.city(ev.target.text);
+             	});
+         
+          });
+      </script>
    </head>
    <body class="not-login login-container-obligado">
       <div class="row-fluid">
@@ -114,9 +112,8 @@
                         <li><a href="#">Cambiar contraseña</a></li>
                      </ul>
                   </li>
-                  
                   <li>
-		          	<img alt="Brand" class="navbar-brand"src="../img/jalisco.gob.png" />
+                     <img alt="Brand" class="navbar-brand"src="../img/jalisco.gob.png" />
                   </li>
                </ul>
             </div>
@@ -513,17 +510,55 @@
                   <h4 class="modal-title" id="myModalLabel">Nuevo Aviso</h4>
                </div>
                <div class="modal-body">
-                	<div class="input-group">
-  <input type="text" class="form-control" placeholder="Destinatarios" value="" id="destinatariosMensaje" >
-  <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
-</div>
-<br />
-<div class="panel panel-primary">
-  <div class="panel-body">
-    Basic panel example
-  </div>
-</div>
-
+                  <div class="input-group">
+                     <input type="text" class="form-control" placeholder="Destinatarios" value="" id="destinatariosMensaje" >
+                     <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
+                  </div>
+                  <br />
+                  <div class="input-group"> 
+                  	<input type="text" class="form-control" id="destinatarioEspecifico" >
+                     <span class="input-group-addon" ><span class="glyphicon glyphicon-plus"></span></span>
+                  </div>
+                  <br />
+                  <div class="panel panel-primary mail-recipient-container">
+                     <div class="panel-body">
+                        <div class="alert alert-default fade in alert-dismissable">
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient">hector@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient-close">herrera@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient-close">perez@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient-close">hugo@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default">daniel@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">labra@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">aguilar@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">mari@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">kimi@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">kurata@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hernandez@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">jose@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">miguel@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">salinas@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">del bosque@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                       
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+  				  		<label for="comment">Aviso</label>
+  						<textarea class="form-control" rows="5" id="mensaje-aviso" placeholder="Escriba aquí su mensaje..."></textarea>
+				</div>
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar&nbsp;&nbsp;</button>
@@ -538,55 +573,49 @@
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h4 class="modal-title">Nuevo Usuario</h4>
                </div>
-               
-               
-               <div class="modal-body row-fluid">               	 
-               	<div class="form-group ">
-  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Usuario:</label></div>
-  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.user" placeholder="Usuario"></div>
-				</div>				
-                <div class="col-md-12">&nbsp;</div>
-               	<div class="form-group ">
-  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Nombre:</label></div>
-  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.given_name" placeholder="Nombre"></div>
-				</div>				
-                <div class="col-md-12">&nbsp;</div>
-				<div class="form-group ">
-				
-  					<div class="col-md-12"><label class="control-label" for="apellidos">Apellidos:</label></div>
-  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Paterno" data-bind="value: usuario.father_lastname"></div>
-  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Materno" data-bind="value: usuario.mother_lastname"></div>  					
-				</div>
-				
-                <div class="col-md-12">&nbsp;</div>
-				<div class="form-group ">
-  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Ciudad:</label></div>
-  					<div class="col-md-12">
-  						<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCiudad" data-toggle="dropdown" aria-haspopup="true" >
-                     	<span id="ciudadSpan">Selecciona tu ciudad</span>
-                     <span class="caret"></span>
-                     </button>
-                     <ul class="dropdown-menu" id="ciudades" >
-                        <li><a href="#">Guadalajara</a></li>
-                        <li><a href="#">Zapopan</a></li>
-                        <li><a href="#">Tlaquepaque</a></li>
-                        <li><a href="#">Ocotlán</a></li>
-                     </ul>
-  					</div>
-				</div>	
-				
-                <div class="col-md-12">&nbsp;</div>
-				<div class="form-group ">
-  					<div class="col-md-12"><label class="control-label" for="inputSuccess1" >RFC:</label></div>
-  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.rfc" id="" aria-describedby="helpBlock2" placeholder="RFC"></div>
-				</div>
-				<div class="col-md-12">&nbsp;</div>
-				<div class="form-group ">
-  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">CURP:</label></div>
-  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.curp"  id="" aria-describedby="helpBlock2" placeholder="CURP"></div>
-				</div>
-				<div class="col-md-12">&nbsp;</div>
-				               
+               <div class="modal-body row-fluid">
+                  <div class="form-group ">
+                     <div class="col-md-12"><label class="control-label" for="inputSuccess1">Usuario:</label></div>
+                     <div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.user" placeholder="Usuario"></div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                  <div class="form-group ">
+                     <div class="col-md-12"><label class="control-label" for="inputSuccess1">Nombre:</label></div>
+                     <div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.given_name" placeholder="Nombre"></div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                  <div class="form-group ">
+                     <div class="col-md-12"><label class="control-label" for="apellidos">Apellidos:</label></div>
+                     <div class="col-md-6"><input type="text" class="form-control" placeholder="Paterno" data-bind="value: usuario.father_lastname"></div>
+                     <div class="col-md-6"><input type="text" class="form-control" placeholder="Materno" data-bind="value: usuario.mother_lastname"></div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                  <div class="form-group ">
+                     <div class="col-md-12"><label class="control-label" for="inputSuccess1">Ciudad:</label></div>
+                     <div class="col-md-12">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCiudad" data-toggle="dropdown" aria-haspopup="true" >
+                        <span id="ciudadSpan">Selecciona tu ciudad</span>
+                        <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" id="ciudades" >
+                           <li><a href="#">Guadalajara</a></li>
+                           <li><a href="#">Zapopan</a></li>
+                           <li><a href="#">Tlaquepaque</a></li>
+                           <li><a href="#">Ocotlán</a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                  <div class="form-group ">
+                     <div class="col-md-12"><label class="control-label" for="inputSuccess1" >RFC:</label></div>
+                     <div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.rfc" id="" aria-describedby="helpBlock2" placeholder="RFC"></div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
+                  <div class="form-group ">
+                     <div class="col-md-12"><label class="control-label" for="inputSuccess1">CURP:</label></div>
+                     <div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.curp"  id="" aria-describedby="helpBlock2" placeholder="CURP"></div>
+                  </div>
+                  <div class="col-md-12">&nbsp;</div>
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelUsuario" >Cancelar</button>

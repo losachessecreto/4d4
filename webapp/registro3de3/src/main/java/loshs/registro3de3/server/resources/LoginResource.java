@@ -13,11 +13,9 @@ import javax.annotation.ManagedBean;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -104,6 +102,7 @@ public class LoginResource {
         return username.equals(new String(password));
     }
 
+    /*
     @GET
     @Path("hashpass")
     @Produces(MediaType.TEXT_PLAIN)
@@ -111,5 +110,5 @@ public class LoginResource {
             throws Exception {
         return Response.ok(psh.getSecureHash(pass.toCharArray())).build();
     }
-
+    */
 }
