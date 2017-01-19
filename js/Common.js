@@ -7,8 +7,8 @@ var Common = {
     	$.ajax({    	
             method: method,
 			url: url,
-            data: JSON.stringify(data),
-            contentType: 'application/json charset=utf-8',
+            data: url.indexOf('login') >= 0 ? data: JSON.stringify(data),
+            contentType: url.indexOf('login') >= 0 ? 'application/x-www-form-urlencoded; charset=UTF-8': 'application/json charset=utf-8',
             timeout: 1000,
             error: function (data) {
 	            
@@ -60,6 +60,7 @@ $(document).ready(function() {
 	});
 		
     $('#enviarMensajeBtnGroup ul li').click(function(e){
+    	$('#destinatariosMensaje').val(e.target.text);
     	$('#mensajesModal').modal();
     });          		
         

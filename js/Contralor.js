@@ -2,7 +2,7 @@ var Contralor = {
 	
 	tableId: '#tableUsuarios',
 	getUsuarios : function () {
-		debugger;
+		
     	Common.makeAPICall(null, 'test/users', 'GET', Contralor.getUsuariosCompleted, null, Contralor.loadTable);
     },
     getUsuario: function (usuarioId) {
