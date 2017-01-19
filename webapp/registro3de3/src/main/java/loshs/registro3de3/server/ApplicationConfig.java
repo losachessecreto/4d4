@@ -57,6 +57,7 @@ public class ApplicationConfig extends Application {
         resources.add(loshs.registro3de3.server.resources.LogoutResource.class);
         resources.add(loshs.registro3de3.server.resources.StatementsResource.class);
         resources.add(loshs.registro3de3.server.resources.UsersResource.class);
+        resources.add(loshs.registro3de3.server.resources.UsersResourceNoauthTest.class);
     }
 
 }

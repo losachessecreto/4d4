@@ -14,12 +14,15 @@ import java.nio.file.Paths;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
@@ -51,39 +54,53 @@ public class FilesResourceNoauthTest {
 
     private static final String ALFRESCO_3_DE_3_FOLDER = "Registro 3 de 3";
 
-    @GET
+    @POST
     @Path("download")
-    public Response download(@QueryParam("path") final String filepath) {
-        final String[] fp = new String[1];
-        if (filepath == null || filepath.length() == 0) {
-            fp[0] = "/tmp/myfile";
-        } else {
-            fp[0] = filepath;
-        }
-
-        StreamingOutput fileStream = new StreamingOutput() {
-            @Override
-            public void write(java.io.OutputStream output) throws IOException, WebApplicationException {
-                java.nio.file.Path path = Paths.get(fp[0]);
-                FileInputStream input = new FileInputStream(path.toFile());
-                int read;
-                while ((read = input.read()) != -1) {
-                    output.write(read);
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response download(@FormParam("objectId") String objectId, @FormParam("fileName") String fileName) {
+        final AlfrescoDocumentObject docu = new AlfrescoDocumentObject(objectId, fileName);
+        return download(docu);
+    }
+    
+    
+    @POST
+    @Path("download")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response download(final AlfrescoDocumentObject docu) {
+        try {
+            StreamingOutput fileStream = new StreamingOutput() {
+                @Override
+                public void write(java.io.OutputStream output) throws IOException {
+                    try {
+                        System.out.println(docu);
+                        Document document = getFromAlfresco(docu.getObjectId(), docu.getFileName());
+                        InputStream input = new BufferedInputStream(document.getContentStream().getStream());
+                        int read;
+                        while ((read = input.read()) != -1) {
+                            output.write(read);
+                        }
+                        output.flush();
+                    }
+                    catch(IllegalArgumentException | NullPointerException ex ){
+                        throw new WebApplicationException(ex);
+                    }
                 }
-                output.flush();
-            }
-        };
-        String fileName = fp[0].lastIndexOf("/") >= 0 ? fp[0].substring(fp[0].lastIndexOf("/") + 1) : fp[0];
-        return Response.ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
-                .header("content-disposition", "attachment; filename = " + fileName).build();
+            };
+            return Response.ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+                    .header("content-disposition", "attachment; filename = " 
+                            + getDocNameFromAlfresco(docu.getObjectId(), docu.getFileName())).build();
+        } catch (IllegalArgumentException | NullPointerException e) {
+            throw new WebApplicationException(e);
+        }
     }
 
     @POST
     @Path("upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadPdfFile(@FormDataParam("file") InputStream fileInputStream,
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response upload(@FormDataParam("file") InputStream fileInputStream,
             @FormDataParam("file") FormDataContentDisposition fileMetaData) throws Exception {
-        String UPLOAD_PATH = "/tmp/registro3de3";
+        String UPLOAD_PATH = "/tmp/";
         String mediaType;
         Object[] ret = new Object[]{null, 500, "Internal Server Error"};
         File tempFile;
@@ -102,10 +119,10 @@ public class FilesResourceNoauthTest {
             mediaType = new loshs.registro3de3.server.FileTypeDetector().probeContentType(tempFile.toPath());
             ret = putToAlfresco(tempFile, mediaType);
         } catch (IOException e) {
-            throw new WebApplicationException("Error al cargar el archivo. Por favor intente nuevamente");
+            throw new WebApplicationException(e);
         }
         return Response.ok(new HTTPJsonResponseObject((Integer) ret[1], (String) ret[2],
-                "El documento se creo correctamente ",
+                "El documento se cargó correctamente ",
                 new AlfrescoDocumentObject((String) ret[0], tempFile.getName(), ALFRESCO_3_DE_3_FOLDER, mediaType))).build();
     }
 
@@ -129,10 +146,58 @@ public class FilesResourceNoauthTest {
         properties.put(PropertyIds.NAME, postedFile.getName());
         InputStream stream = new BufferedInputStream(new FileInputStream(postedFile));
         ContentStream contentStream = new ContentStreamImpl(postedFile.getName(), BigInteger.valueOf(postedFile.length()), mediaType, stream);
-        Document newDoc = root.createDocument(properties, contentStream, VersioningState.MAJOR);
-
+        Document newDoc = alfresco3de3folder.createDocument(properties, contentStream, VersioningState.MAJOR);
         retVal[0] = newDoc.getId();
         return retVal;
     }
+
+    private Document getFromAlfresco(String objectId, String name) {
+        Session session = dsc.getAlfrescoSessionFactory().createSession(dsc.getAlfrescoParemeters());
+        Document document;
+        if (objectId != null) {
+            LOGGER.log(Level.INFO, "objectId is not null = {0}", objectId);
+            LOGGER.log(Level.INFO, "session.exists(objectId) is = {0}", session.exists(objectId));
+            if (session.exists(objectId)) {
+                document = (Document) session.getObject(session.createObjectId(objectId));
+            } else {
+                throw new IllegalArgumentException("No existe el documento con el Id solicitado.");
+            }
+        } else {
+            if (name == null) {
+                throw new NullPointerException("Alguno de los parametros objectId o fileName debe no ser nulo.");
+            }
+            Folder root = session.getRootFolder();
+            Folder alfresco3de3folder = (Folder) session.getObjectByPath(root.getPath(), ALFRESCO_3_DE_3_FOLDER);
+            LOGGER.log(Level.INFO, "name is not null = {0}", name);
+            LOGGER.log(Level.INFO, "session.existsPath(alfresco3de3folder.getPath(), name) is = {0}", session.existsPath(alfresco3de3folder.getPath(), name));
+            if (session.existsPath(alfresco3de3folder.getPath(), name)) {
+                document = (Document) session.getObjectByPath(alfresco3de3folder.getPath(), name);
+            } else {
+                throw new IllegalArgumentException("No existe el documento con el Nombre solicitado.");
+            }
+        }
+        return document;
+    }
+    
+    
+    
+    private String getDocNameFromAlfresco(String objectId, String name) {
+        Session session = dsc.getAlfrescoSessionFactory().createSession(dsc.getAlfrescoParemeters());
+        Document document;
+        if (objectId != null) {
+            if (session.exists(objectId)) {
+                document = (Document) session.getObject(session.createObjectId(objectId));
+                return document.getName();
+            } else {
+                if (name != null && !name.isEmpty()) {
+                    return name;
+                } 
+                throw new IllegalArgumentException("No existe el documento con el Id solicitado.");
+            }
+        } else {
+            throw new NullPointerException("Alguno de los parametros objectId o fileName debe no ser nulo.");
+        }
+    }
+
 
 }

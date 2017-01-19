@@ -20,7 +20,7 @@ public class DatasourceContainer {
 
     private static final PGPoolingDataSource POSTGRES_DATASOURCE = new PGPoolingDataSource();
 
-    private static final String ALFRESCO_URL = "http://192.168.1.68:8080/alfresco/api/-default-/public/cmis/versions/1.1/browser";
+    private static final String ALFRESCO_URL = "http://192.168.15.5:8080/alfresco/api/-default-/public/cmis/versions/1.1/browser";
     private static final String ALFRESCO_USER = "admin";
     private static final String ALFRESCO_PASS = "celulares";
     private static final String ALFRESCO_REPO = "-default-";

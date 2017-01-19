@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,7 +64,8 @@ public class UsersResource {
                         dsc.convertDate(rs.getTimestamp("last_modification_date")),
                         rs.getInt("last_user_modified"),
                         dsc.convertDate(rs.getTimestamp("last_access_date")),
-                        rs.getString("last_ip"));
+                        rs.getString("last_ip"),
+                        rs.getString("curp"));
                 userList.add(user);
             }
             /*
@@ -120,7 +120,8 @@ public class UsersResource {
                         dsc.convertDate(rs.getTimestamp("last_modification_date")),
                         rs.getInt("last_user_modified"),
                         dsc.convertDate(rs.getTimestamp("last_access_date")),
-                        rs.getString("last_ip"));
+                        rs.getString("last_ip"),
+                        rs.getString("curp"));
             } else {
                 return Response.status(Status.NOT_FOUND)
                         .entity(new HTTPJsonResponseObject(404, "Not Found",
@@ -145,18 +146,19 @@ public class UsersResource {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
+            java.util.Date now = new java.util.Date();
             conn = dsc.getPostgresDatasource().getConnection();
             st = conn.prepareStatement("INSERT INTO users("
                     + "rfc, \"user\", password, mail, father_lastname, mother_lastname, given_name,"
                     + "city, entity, position, register_date, last_modification_date, last_user_modified, "
-                    + "last_access_date, last_ip)"
+                    + "last_access_date, last_ip, curp)"
                     + "VALUES (?, ?, ?, ?, ?, ?, "
                     + "?, ?, ?, ?, ?, ?, ?, "
-                    + "?, ?) RETURNING id");
+                    + "?, ?, ?) RETURNING id");
             st.setString(1, user.getRfc());
             st.setString(2, user.getUser());
             if (user.getPassword() != null) {
-                st.setString(3, new String(user.getPassword()));
+                st.setString(3, user.getPassword());
             } else {
                 st.setNull(3, Types.VARCHAR);
             }
@@ -170,13 +172,13 @@ public class UsersResource {
             if (user.getRegister_date() != null) {
                 st.setDate(11, new java.sql.Date(user.getRegister_date().getTime()));
             } else {
-                st.setNull(11, Types.DATE);
+                st.setDate(11, new java.sql.Date(now.getTime()));
             }
 
             if (user.getLast_modification_date() != null) {
                 st.setDate(12, new java.sql.Date(user.getLast_modification_date().getTime()));
             } else {
-                st.setNull(12, Types.DATE);
+                 st.setDate(12, new java.sql.Date(now.getTime()));
             }
 
             if (user.getLast_user_modified() != null) {
@@ -195,6 +197,12 @@ public class UsersResource {
                 st.setString(15, user.getLast_ip());
             } else {
                 st.setNull(15, Types.OTHER);
+            }
+            
+            if (user.getCurp() != null) {
+                st.setString(16, user.getCurp());
+            } else {
+                st.setNull(16, Types.VARCHAR);
             }
 
             rs = st.executeQuery();

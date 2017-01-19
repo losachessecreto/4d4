@@ -9,7 +9,7 @@ public class User {
     private Integer id;
     private String rfc;
     private String user;
-    private char[] password;
+    private String password;
     private String mail;
     private String father_lastname;
     private String mother_lastname;
@@ -22,6 +22,7 @@ public class User {
     private Integer last_user_modified;
     private Date last_access_date;
     private String last_ip;
+    private String curp;
 
     public User() {
 
@@ -29,7 +30,7 @@ public class User {
 
     public User(Integer id, String rfc, String user, /*char[] password,*/ String mail, String father_lastname,
             String mother_lastname, String given_name, String city, String entity, String position, Date register_date,
-            Date last_modification_date, Integer last_user_modified, Date last_access_date, String last_ip) {
+            Date last_modification_date, Integer last_user_modified, Date last_access_date, String last_ip, String curp) {
         this.id = id;
         this.rfc = rfc;
         this.user = user;
@@ -47,6 +48,7 @@ public class User {
         this.last_user_modified = last_user_modified;
         this.last_access_date = last_access_date;
         this.last_ip = last_ip;
+        this.curp = curp;
     }
 
     public Integer getId() {
@@ -74,11 +76,11 @@ public class User {
     }
 
     
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     
@@ -178,4 +180,11 @@ public class User {
         this.last_ip = last_ip;
     }
 
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
+    }
 }
