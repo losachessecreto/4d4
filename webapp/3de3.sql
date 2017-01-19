@@ -5,7 +5,7 @@
 -- Dumped from database version 9.1.24
 -- Dumped by pg_dump version 9.5.5
 
--- Started on 2017-01-14 17:06:27 CST
+-- Started on 2017-01-19 00:48:14 CST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -87,7 +87,7 @@ ALTER SEQUENCE statements_id_seq OWNED BY statements.id;
 CREATE TABLE users (
     id integer NOT NULL,
     status smallint DEFAULT 0 NOT NULL,
-    rfc text NOT NULL,
+    rfc text,
     "user" text NOT NULL,
     password text NOT NULL,
     mail text NOT NULL,
@@ -101,7 +101,8 @@ CREATE TABLE users (
     last_modification_date timestamp without time zone,
     last_user_modified integer,
     last_access_date timestamp without time zone,
-    last_ip inet
+    last_ip inet,
+    curp text
 );
 
 
@@ -204,7 +205,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2017-01-14 17:06:27 CST
+-- Completed on 2017-01-19 00:48:14 CST
 
 --
 -- PostgreSQL database dump complete
