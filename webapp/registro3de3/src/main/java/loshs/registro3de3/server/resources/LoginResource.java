@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,6 +26,7 @@ import javax.ws.rs.core.Response.Status;
 import loshs.registro3de3.server.beans.DatasourceContainer;
 import loshs.registro3de3.server.beans.HTTPJsonResponseObject;
 import loshs.registro3de3.server.beans.PasswordHasher;
+import loshs.registro3de3.server.beans.User;
 
 @ManagedBean
 @Path("login")
@@ -42,10 +44,29 @@ public class LoginResource {
     static final Logger LOGGER = Logger.getLogger(LoginResource.class.getName());
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(@FormParam("user") String username, @FormParam("password") String password) {
+    public Response login(User user) {
         URI uri;
-        if (authenticate(username, password.toCharArray())) {
+        if (authenticate(user.getUser(), user.getPassword().toCharArray())) {
+            request.getSession(true);
+            //return Response.seeOther(uri).cookie(new NewCookie("name", "Hello, world!")).build();
+            return Response.status(Status.OK).entity(new HTTPJsonResponseObject(200, "OK",
+                    "Autorizado", Boolean.TRUE)).build();
+
+        } else {
+            return Response.status(Status.UNAUTHORIZED).entity(new HTTPJsonResponseObject(401, "Unauthorized",
+                    "El usuario o constraseña son incorrectos", Boolean.FALSE)).build();
+            //return Response.seeOther(uri).cookie(new NewCookie("name", "Hello, world!")).build();
+        }
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response login(@FormParam("user") String user, @FormParam("password") String password) {
+        URI uri;
+        if (authenticate(user, password.toCharArray())) {
             request.getSession(true);
             //return Response.seeOther(uri).cookie(new NewCookie("name", "Hello, world!")).build();
             return Response.status(Status.OK).entity(new HTTPJsonResponseObject(200, "OK",

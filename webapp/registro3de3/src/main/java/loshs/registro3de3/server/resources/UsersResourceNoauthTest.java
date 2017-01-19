@@ -1,5 +1,7 @@
 package loshs.registro3de3.server.resources;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +26,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import loshs.registro3de3.server.beans.DatasourceContainer;
 import loshs.registro3de3.server.beans.HTTPJsonResponseObject;
+import loshs.registro3de3.server.beans.PasswordHasher;
 import loshs.registro3de3.server.beans.Registro3de3Exception;
 import loshs.registro3de3.server.beans.User;
 
@@ -33,6 +36,9 @@ public class UsersResourceNoauthTest {
 
     @Context
     DatasourceContainer dsc;
+    
+    @Context
+    PasswordHasher psh;
 
     static final Logger LOGGER = Logger.getLogger(UsersResource.class.getName());
 
@@ -141,7 +147,7 @@ public class UsersResourceNoauthTest {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postUser(User user) {
+    public Response postUser(User user) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -158,7 +164,8 @@ public class UsersResourceNoauthTest {
             st.setString(1, user.getRfc());
             st.setString(2, user.getUser());
             if (user.getPassword() != null) {
-                st.setString(3, user.getPassword());
+                String hash = psh.getSecureHash(user.getPassword().toCharArray());
+                st.setString(3, hash);
             } else {
                 st.setNull(3, Types.VARCHAR);
             }

@@ -10,21 +10,60 @@
       <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
       <script src="../js/jquery-3.1.1.min.js"></script>	
       <script src="../js/bootstrap.js"></script>	      
-      <script src="../js/datatables.min.js"></script>	      
+      <script src="../js/datatables.min.js"></script>	           
+      <script src="../js/knockout.min.js"></script>	 
       <script src="../js/Common.js"></script>	    
       <script src="../js/Contralor.js"></script>	          
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      
+      
       <script type="text/javascript">
-         $(document).ready(function() {
-         
+      var viewModel = {
+      	usuario: {
+      		given_name: ko.observable(''), 
+      		     		
+      		father_lastname: ko.observable(''),     		
+      		mother_lastname: ko.observable(''),
+      		rfc: ko.observable(''),
+      		mail: ko.observable(''),
+      		curp: ko.observable(''),
+      		city: ko.observable(''),
+      		mail: ko.observable('prueba@prueba'),
+      		user: ko.observable(''),
+      		password: ko.observable(''),
+      		entity: ko.observable('Contraloría del estado de pruebas'),
+      		position: 'Usuario de Prueba'
+      	}
+      };
+      
+      $(document).ready(function() {
+      		ko.applyBindings(viewModel);
+          	          	          	
          	Contralor.getUsuarios();
          	
          	$('#agregarUsuario').click(function() {
          		$('#usuariosModal').modal();
-         	});        				
-         });
-      </script>
+         	});       
+          	
+          	$('#agregarUsuario').click(function() {
+         		$('#usuariosModal').modal();
+         	});       
+          	
+          	$('#submitUsuario').click(function() {
+          		viewModel.usuario.password(viewModel.usuario.user());
+          		Contralor.agregarUsuario(viewModel.usuario);
+         		$('#usuariosModal').modal('hide');
+         	});       
+          	
+          	$('#ciudades > li > a').click(function(ev) {
+          		
+          		$('#ciudadSpan').text(ev.target.text);
+          		viewModel.usuario.city(ev.target.text);
+          	});
+
+       });
+   </script>
    </head>
    <body class="not-login login-container-obligado">
       <div class="row-fluid">
@@ -474,12 +513,17 @@
                   <h4 class="modal-title" id="myModalLabel">Nuevo Aviso</h4>
                </div>
                <div class="modal-body">
-                  <p>1</p>
-                  <p>1</p>
-                  <p>1</p>
-                  <p>1</p>
-                  <p>1</p>
-                  <p>1</p>
+                	<div class="input-group">
+  <input type="text" class="form-control" placeholder="Destinatarios" value="" id="destinatariosMensaje" >
+  <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
+</div>
+<br />
+<div class="panel panel-primary">
+  <div class="panel-body">
+    Basic panel example
+  </div>
+</div>
+
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar&nbsp;&nbsp;</button>
@@ -498,16 +542,20 @@
                
                <div class="modal-body row-fluid">               	 
                	<div class="form-group ">
+  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Usuario:</label></div>
+  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.user" placeholder="Usuario"></div>
+				</div>				
+                <div class="col-md-12">&nbsp;</div>
+               	<div class="form-group ">
   					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Nombre:</label></div>
-  					<div class="col-md-12"><input type="text" class="form-control" id="" aria-describedby="helpBlock2" placeholder="Nombre"></div>
-				</div>
-				
-                  <div class="col-md-12">&nbsp;</div>
+  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.given_name" placeholder="Nombre"></div>
+				</div>				
+                <div class="col-md-12">&nbsp;</div>
 				<div class="form-group ">
 				
   					<div class="col-md-12"><label class="control-label" for="apellidos">Apellidos:</label></div>
-  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Paterno"></div>
-  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Materno"></div>  					
+  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Paterno" data-bind="value: usuario.father_lastname"></div>
+  					<div class="col-md-6"><input type="text" class="form-control" placeholder="Materno" data-bind="value: usuario.mother_lastname"></div>  					
 				</div>
 				
                 <div class="col-md-12">&nbsp;</div>
@@ -515,10 +563,10 @@
   					<div class="col-md-12"><label class="control-label" for="inputSuccess1">Ciudad:</label></div>
   					<div class="col-md-12">
   						<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownCiudad" data-toggle="dropdown" aria-haspopup="true" >
-                     	Selecciona tu ciudad
+                     	<span id="ciudadSpan">Selecciona tu ciudad</span>
                      <span class="caret"></span>
                      </button>
-                     <ul class="dropdown-menu" >
+                     <ul class="dropdown-menu" id="ciudades" >
                         <li><a href="#">Guadalajara</a></li>
                         <li><a href="#">Zapopan</a></li>
                         <li><a href="#">Tlaquepaque</a></li>
@@ -529,21 +577,20 @@
 				
                 <div class="col-md-12">&nbsp;</div>
 				<div class="form-group ">
-  					<div class="col-md-12"><label class="control-label" for="inputSuccess1">RFC:</label></div>
-  					<div class="col-md-12"><input type="text" class="form-control" id="" aria-describedby="helpBlock2" placeholder="RFC"></div>
+  					<div class="col-md-12"><label class="control-label" for="inputSuccess1" >RFC:</label></div>
+  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.rfc" id="" aria-describedby="helpBlock2" placeholder="RFC"></div>
 				</div>
 				<div class="col-md-12">&nbsp;</div>
 				<div class="form-group ">
   					<div class="col-md-12"><label class="control-label" for="inputSuccess1">CURP:</label></div>
-  					<div class="col-md-12"><input type="text" class="form-control" id="" aria-describedby="helpBlock2" placeholder="CURP"></div>
+  					<div class="col-md-12"><input type="text" class="form-control" data-bind="value: usuario.curp"  id="" aria-describedby="helpBlock2" placeholder="CURP"></div>
 				</div>
 				<div class="col-md-12">&nbsp;</div>
-				
-               
+				               
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
-                  <button type="button" class="btn btn-primary">Agregar</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelUsuario" >Cancelar</button>
+                  <button type="button" class="btn btn-primary" id="submitUsuario">Agregar</button>
                </div>
             </div>
          </div>

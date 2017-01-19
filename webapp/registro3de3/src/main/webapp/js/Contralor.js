@@ -3,7 +3,7 @@ var Contralor = {
 	tableId: '#tableUsuarios',
 	getUsuarios : function () {
 		
-    	Common.makeAPICall(null, 'users', 'GET', Contralor.getUsuariosCompleted, null, Contralor.loadTable);
+    	Common.makeAPICall(null, 'test/users', 'GET', Contralor.getUsuariosCompleted, null, Contralor.loadTable);
     },
     getUsuario: function (usuarioId) {
     	if(!!usuarioId) {
@@ -24,6 +24,24 @@ var Contralor = {
     		$('#rfcUsuario').text(tableUser.rfc);
     	}
     },    
+    agregarUsuario: function(usuario) {
+    	
+    	var apiUsuario = {
+      		  
+   "city":"Guadalajara, Jalisco",
+   "entity":"Contraloría del Estado",
+   "father_lastname":"Herrera",
+   "given_name":"Hector",
+   "mail":"hectormmmm@loshs.com",
+   "mother_lastname":"Perez",
+   "position":"Contralor",
+   "rfc":"XXXX123456XXX",
+   "user":"hperezmmmm"
+
+      	}
+    	
+	    Common.makeAPICall(apiUsuario, 'test/users' , 'POST');
+    },
     getUsuariosCompleted : function (data) {
     	
     	if(!!data) {
