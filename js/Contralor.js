@@ -40,8 +40,7 @@ var Contralor = {
       		'entity': 'Contraloría del estado de pruebas',
       		'position': 'Usuario de Prueba'
       	}
-      	
-      	
+            	
     	
 	    Common.makeAPICall(apiUsuario, 'test/users' , 'POST', Contralor.getUsuarios);
     },

@@ -63,6 +63,11 @@ $(document).ready(function() {
     	$('#destinatariosMensaje').val(e.target.text);
     	$('#mensajesModal').modal();
     });          		
+      
+    $('div.mail-recipient-container > div > div > a').click(function(ev) { 
+    	$('#destinatarioEspecifico').val(ev.target.text);
+    });
+  
         
 	$('[name="subMenu"]').click(function(e){
 			

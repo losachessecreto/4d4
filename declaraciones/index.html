@@ -22,10 +22,6 @@
          	$('#tableDeclaraciones').dataTable({
          		'scrollCollapse' : true,
                 	'scrollY': "250px"
-         	});
-         	
-         	$('#enviarMensajeBtnGroup ul li').click(function(e){
-         		$('#myModal').modal();
          	});         	
          });
          
@@ -329,24 +325,70 @@
             </div>
          </div>
       </div>
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal fade" id="mensajesModal" tabindex="-1" role="dialog" >
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                  <h4 class="modal-title" id="myModalLabel">Nuevo Aviso</h4>
                </div>
                <div class="modal-body">
-                  ...
+                  <div class="input-group">
+                     <input type="text" class="form-control" placeholder="Destinatarios" value="" id="destinatariosMensaje" >
+                     <span class="input-group-addon" ><span class="glyphicon glyphicon-search"></span></span>
+                  </div>
+                  <br />
+                  <div class="input-group"> 
+                  	<input type="text" class="form-control" id="destinatarioEspecifico" >
+                     <span class="input-group-addon" ><span class="glyphicon glyphicon-plus"></span></span>
+                  </div>
+                  <br />
+                  <div class="panel panel-primary mail-recipient-container">
+                     <div class="panel-body">
+                        <div class="alert alert-default fade in alert-dismissable">
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient">hector@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient-close">herrera@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient-close">perez@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default mail-anchor"><span class="mail-recipient-close">hugo@loshs.com</span> &nbsp; &nbsp;<span class="glyphicon glyphicon-remove mail-recipient-close"></span></a>
+                           <a href="#" class="btn btn-default">daniel@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">labra@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">aguilar@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">mari@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">kimi@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">kurata@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hernandez@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">jose@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">miguel@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">salinas@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">del bosque@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                           <a href="#" class="btn btn-default">hector@loshs.com &nbsp; &nbsp;<span class="glyphicon glyphicon-remove"></span></a>
+                       
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group">
+  				  		<label for="comment">Aviso</label>
+  						<textarea class="form-control" rows="5" id="mensaje-aviso" placeholder="Escriba aquí su mensaje..."></textarea>
+				</div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;Enviar&nbsp;&nbsp;</button>
                </div>
             </div>
          </div>
       </div>
-   
 	<footer class="footer footer-background">
       <div class="row">
         <div class="col-md-12">
