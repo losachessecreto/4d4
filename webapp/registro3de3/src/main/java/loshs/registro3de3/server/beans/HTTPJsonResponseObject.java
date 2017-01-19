@@ -8,6 +8,7 @@ public class HTTPJsonResponseObject {
     private String status_message;
     private String message;
     private Boolean success;
+    private AlfrescoDocumentObject document;
     
     public HTTPJsonResponseObject(){
 
@@ -24,6 +25,13 @@ public class HTTPJsonResponseObject {
         this.status_message = status_message;
         this.message = message;
         this.success = success;
+    }
+    
+    public HTTPJsonResponseObject(Integer status_code, String status_message, String message, AlfrescoDocumentObject document) {
+        this.status_code = status_code;
+        this.status_message = status_message;
+        this.message = message;
+        this.document = document;
     }
 
     public Integer getStatus_code() {
@@ -57,4 +65,14 @@ public class HTTPJsonResponseObject {
     public void setSuccess(Boolean success) {
         this.success = success;
     }
+
+    public AlfrescoDocumentObject getDocument() {
+        return document;
+    }
+
+    public void setDocument(AlfrescoDocumentObject document) {
+        this.document = document;
+    }
+
+    
 }

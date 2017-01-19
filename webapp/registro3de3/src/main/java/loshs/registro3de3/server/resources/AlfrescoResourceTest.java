@@ -66,19 +66,20 @@ public class AlfrescoResourceTest {
     }
 
     @GET
-    @Path("listroot")
+    @Path("list")
     @Produces(MediaType.TEXT_HTML)
     public Response list(@QueryParam("path") final String filepath) {
         Session session = dsc.getAlfrescoSessionFactory().createSession(dsc.getAlfrescoParemeters());
 
         Folder root = session.getRootFolder();
-
-        ItemIterable<CmisObject> children = root.getChildren();
+        Folder alfresco3de3folder = (Folder) session.getObjectByPath(root.getPath(), "Registro 3 de 3");
+        ItemIterable<CmisObject> children = alfresco3de3folder.getChildren();
 
         String s = "<html><body><ul>";
 
         for (CmisObject o : children) {
             s += "<li>" + o.getName() + "</li>";
+            s += "<li>" + o.getId() + "</li>";
             //System.out.println(o.getName());
         }
 
@@ -95,6 +96,8 @@ public class AlfrescoResourceTest {
         Folder root = session.getRootFolder();
 
         String name = "kimiresume.pdf";
+        
+        //String name = "registro3de3Mari-kimi-UX-Resume.pdf";
 
         if (session.existsPath(root.getPath(), name)) {
             CmisObject o = session.getObjectByPath(root.getPath(), name);

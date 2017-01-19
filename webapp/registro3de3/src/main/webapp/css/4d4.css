@@ -317,3 +317,27 @@ body.body-login{
 div.panel-acciones > div.panel{
 	border: 1px solid #239485;
 }
+.texto-paso-reporte {
+	font-size: 5em;
+	font-weight: bold;
+}
+.clear-opacity {
+	opacity: .4;
+}
+
+.verde-pino-background-5 {
+	background: rgba(167,212,206,1);
+	
+}
+.verde-pino-background-7 {
+	background: rgba(123,191,182,1);
+	
+}
+.verde-pino-background-9 {
+	background: rgba(35,148,133,1)	
+}
+.reportes-filters > div.col-md-4 {
+	height: 250px;
+}
+table.dataTable tr.odd { background-color: #EFEFEF; }
+table.dataTable tr.even { background-color: white; }
