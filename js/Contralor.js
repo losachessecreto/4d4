@@ -27,20 +27,23 @@ var Contralor = {
     agregarUsuario: function(usuario) {
     	
     	var apiUsuario = {
-      		  
-   "city":"Guadalajara, Jalisco",
-   "entity":"Contraloría del Estado",
-   "father_lastname":"Herrera",
-   "given_name":"Hector",
-   "mail":"hectormmmm@loshs.com",
-   "mother_lastname":"Perez",
-   "position":"Contralor",
-   "rfc":"XXXX123456XXX",
-   "user":"hperezmmmm"
-
+      		'given_name': usuario.given_name(),       		     		
+      		'father_lastname': usuario.father_lastname(),     		
+      		'mother_lastname': usuario.mother_lastname(),
+      		'rfc': usuario.rfc(),
+      		'mail': usuario.mail(),
+      		'curp': usuario.curp(),
+      		'city': usuario.city(),
+      		'mail': usuario.user() + '@loshs.com', 
+      		'user': usuario.user(),
+      		'password': usuario.user(),
+      		'entity': 'Contraloría del estado de pruebas',
+      		'position': 'Usuario de Prueba'
       	}
+      	
+      	
     	
-	    Common.makeAPICall(apiUsuario, 'test/users' , 'POST');
+	    Common.makeAPICall(apiUsuario, 'test/users' , 'POST', Contralor.getUsuarios);
     },
     getUsuariosCompleted : function (data) {
     	
