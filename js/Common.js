@@ -1,5 +1,5 @@
 var Common = {
-	apiUrl:'http://192.168.1.66:8080/registro3de3/webapi',    
+	apiUrl:'http://192.168.15.18:8080/registro3de3/webapi',    
 	makeAPICall : function (data, moduleUrl, method, successCallback, successParams, errorCallback, errorParams) {
 		
 		var url =Common.apiUrl + '/' + moduleUrl;
@@ -7,7 +7,8 @@ var Common = {
     	$.ajax({    	
             method: method,
 			url: url,
-            data: data,
+            data: JSON.stringify(data),
+            contentType: 'application/json charset=utf-8',
             timeout: 1000,
             error: function (data) {
 	            
